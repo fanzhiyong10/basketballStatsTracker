@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1728EFD1C600920DA6 /* AppDelegate.swift */; };
 		66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */; };
-		66EACA1C28EFD1C600920DA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1B28EFD1C600920DA6 /* ViewController.swift */; };
+		66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1B28EFD1C600920DA6 /* MainViewController.swift */; };
 		66EACA1F28EFD1C600920DA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66EACA1D28EFD1C600920DA6 /* Main.storyboard */; };
 		66EACA2228EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA2028EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld */; };
 		66EACA2428EFD1C800920DA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66EACA2328EFD1C800920DA6 /* Assets.xcassets */; };
@@ -17,6 +17,8 @@
 		66EACA3228EFD1C800920DA6 /* basketballStatsTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA3128EFD1C800920DA6 /* basketballStatsTrackerTests.swift */; };
 		66EACA3C28EFD1C800920DA6 /* basketballStatsTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA3B28EFD1C800920DA6 /* basketballStatsTrackerUITests.swift */; };
 		66EACA3E28EFD1C800920DA6 /* basketballStatsTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA3D28EFD1C800920DA6 /* basketballStatsTrackerUITestsLaunchTests.swift */; };
+		66EACA4E28F008FF00920DA6 /* MainViewControllerExtTopUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA4D28F008FF00920DA6 /* MainViewControllerExtTopUI.swift */; };
+		66EACA5028F064BA00920DA6 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA4F28F064BA00920DA6 /* LiveData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +42,7 @@
 		66EACA1428EFD1C600920DA6 /* basketballStatsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketballStatsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EACA1728EFD1C600920DA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		66EACA1B28EFD1C600920DA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66EACA1B28EFD1C600920DA6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		66EACA1E28EFD1C600920DA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66EACA2128EFD1C600920DA6 /* basketballStatsTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = basketballStatsTracker.xcdatamodel; sourceTree = "<group>"; };
 		66EACA2328EFD1C800920DA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		66EACA3728EFD1C800920DA6 /* basketballStatsTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = basketballStatsTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EACA3B28EFD1C800920DA6 /* basketballStatsTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = basketballStatsTrackerUITests.swift; sourceTree = "<group>"; };
 		66EACA3D28EFD1C800920DA6 /* basketballStatsTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = basketballStatsTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		66EACA4D28F008FF00920DA6 /* MainViewControllerExtTopUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtTopUI.swift; sourceTree = "<group>"; };
+		66EACA4F28F064BA00920DA6 /* LiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +105,9 @@
 		66EACA1628EFD1C600920DA6 /* basketballStatsTracker */ = {
 			isa = PBXGroup;
 			children = (
-				66EACA1728EFD1C600920DA6 /* AppDelegate.swift */,
-				66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */,
-				66EACA1B28EFD1C600920DA6 /* ViewController.swift */,
-				66EACA1D28EFD1C600920DA6 /* Main.storyboard */,
-				66EACA2328EFD1C800920DA6 /* Assets.xcassets */,
-				66EACA2528EFD1C800920DA6 /* LaunchScreen.storyboard */,
+				66EACA4C28EFDC2400920DA6 /* support */,
+				66EACA4B28EFD30100920DA6 /* controller */,
+				66EACA4A28EFD2F900920DA6 /* model */,
 				66EACA2828EFD1C800920DA6 /* Info.plist */,
 				66EACA2028EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld */,
 			);
@@ -128,6 +129,35 @@
 				66EACA3D28EFD1C800920DA6 /* basketballStatsTrackerUITestsLaunchTests.swift */,
 			);
 			path = basketballStatsTrackerUITests;
+			sourceTree = "<group>";
+		};
+		66EACA4A28EFD2F900920DA6 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				66EACA4F28F064BA00920DA6 /* LiveData.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		66EACA4B28EFD30100920DA6 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				66EACA1B28EFD1C600920DA6 /* MainViewController.swift */,
+				66EACA4D28F008FF00920DA6 /* MainViewControllerExtTopUI.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		66EACA4C28EFDC2400920DA6 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				66EACA1728EFD1C600920DA6 /* AppDelegate.swift */,
+				66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */,
+				66EACA1D28EFD1C600920DA6 /* Main.storyboard */,
+				66EACA2328EFD1C800920DA6 /* Assets.xcassets */,
+				66EACA2528EFD1C800920DA6 /* LaunchScreen.storyboard */,
+			);
+			path = support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,10 +291,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66EACA1C28EFD1C600920DA6 /* ViewController.swift in Sources */,
+				66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */,
+				66EACA4E28F008FF00920DA6 /* MainViewControllerExtTopUI.swift in Sources */,
 				66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */,
 				66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */,
 				66EACA2228EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld in Sources */,
+				66EACA5028F064BA00920DA6 /* LiveData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +490,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -486,7 +518,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
