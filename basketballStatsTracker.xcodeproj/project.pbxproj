@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */; };
 		66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1728EFD1C600920DA6 /* AppDelegate.swift */; };
 		66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */; };
 		66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1B28EFD1C600920DA6 /* MainViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtStatsTableUI.swift; sourceTree = "<group>"; };
 		66EACA1428EFD1C600920DA6 /* basketballStatsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketballStatsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EACA1728EFD1C600920DA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				66EACA1B28EFD1C600920DA6 /* MainViewController.swift */,
 				66EACA4D28F008FF00920DA6 /* MainViewControllerExtTopUI.swift */,
+				66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */,
+				66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */,
 				66EACA4E28F008FF00920DA6 /* MainViewControllerExtTopUI.swift in Sources */,
 				66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */,
 				66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */,
