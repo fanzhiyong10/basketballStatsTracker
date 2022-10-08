@@ -437,10 +437,12 @@ extension MainViewController {
                 lab.textColor = .systemGreen
                 let font = UIFont.systemFont(ofSize: 18, weight: .bold)
                 lab.font = font
+                lab.frame.origin.x = 2
                 lab.sizeToFit()
             } else {
                 lab.textColor = .black
                 lab.font = font
+                lab.frame.origin.x = 8
             }
         }
         
@@ -551,10 +553,7 @@ extension MainViewController {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView( withIdentifier: self.headerID)!
-        // section：背景色
-        headerView.backgroundView = UIView()
-        headerView.backgroundView?.backgroundColor = .white
-        
+
         let font = UIFont.systemFont(ofSize: 10)
 
         if headerView.viewWithTag(1000) == nil {
@@ -594,7 +593,7 @@ extension MainViewController {
             }
         }
         
-        headerView.contentView.backgroundColor = UIColor.blue
+        headerView.contentView.backgroundColor = UIColor.systemBlue
         
         return headerView
     }
@@ -620,7 +619,7 @@ extension MainViewController {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = tableView.dequeueReusableHeaderFooterView( withIdentifier: self.headerID)!
+        let footerView = tableView.dequeueReusableHeaderFooterView( withIdentifier: self.footerID)!
         // backgroundColor
         footerView.backgroundView = UIView()
         footerView.backgroundView?.backgroundColor = .white
@@ -1103,17 +1102,8 @@ extension MainViewController {
         }
         
         footerView.contentView.backgroundColor = UIColor.systemGray
-        /*
-        //背景颜色：相邻的两行颜色不同（奇偶不同）
-        if self.allLiveDatas.count % 2 == 0 {
-//            cell.backgroundColor = .systemGray3
-            footerView.contentView.backgroundColor = .systemGray3
-        }
-        else {
-//            cell.backgroundColor = .systemGray5
-            footerView.contentView.backgroundColor = .systemGray5
-        }
-        */
+        
+        
         return footerView
     }
 }

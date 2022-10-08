@@ -32,10 +32,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellID)
         self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: self.headerID)
+        self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: self.footerID)
+        
         self.tableView.separatorColor = UIColor.white
         self.tableView.separatorStyle = .singleLine
+        
         // table header gap
-        self.tableView.sectionHeaderTopPadding = 0
+        if #available(iOS 15.0, *) {
+            self.tableView.sectionHeaderTopPadding = 0
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -75,6 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView!
     let cellID = "cellID"
     let headerID = "headerID"
+    let footerID = "footerID"
 
     var allLiveDatas = [LiveData]()
     var totalData: LiveData?
@@ -183,5 +189,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     // Header Words
     let headerWords = ["PLAYER", "NUMBER", "MINUTES", "PER", "POINTS", "FT", "2FG", "3FG", "eFG%", "ASSTS", "OREBS", "DREBS", "STEALS", "BLOCKS", "DEFS", "CHARGES", "TOS"]
+    
+    /// players
+    func doSelectPlayerNumbers(_ playerNumbers: [String]) {
+        
+        for (index, liveData) in self.allLiveDatas.enumerated() {
+            if playerNumbers.contains(liveData.number!) {
+                self.allLiveDatas[index].isOnCourt = true
+            } else {
+                self.allLiveDatas[index].isOnCourt = false
+            }
+        }
+        
+        tableView.reloadData()
+    }
 }
 

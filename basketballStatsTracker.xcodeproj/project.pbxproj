@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */; };
+		66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */; };
 		66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1728EFD1C600920DA6 /* AppDelegate.swift */; };
 		66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */; };
 		66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1B28EFD1C600920DA6 /* MainViewController.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtStatsTableUI.swift; sourceTree = "<group>"; };
+		66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstitutePlayersViewController.swift; sourceTree = "<group>"; };
 		66EACA1428EFD1C600920DA6 /* basketballStatsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketballStatsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EACA1728EFD1C600920DA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EACA1928EFD1C600920DA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				66EACA1B28EFD1C600920DA6 /* MainViewController.swift */,
 				66EACA4D28F008FF00920DA6 /* MainViewControllerExtTopUI.swift */,
 				66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */,
+				66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */,
 				66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */,
 				66EACA4E28F008FF00920DA6 /* MainViewControllerExtTopUI.swift in Sources */,
+				66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */,
 				66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */,
 				66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */,
 				66EACA2228EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld in Sources */,
@@ -485,6 +489,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -513,6 +518,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -159,6 +159,8 @@ extension MainViewController {
         self.playersButton.layer.borderColor = UIColor.systemGray.cgColor
         self.topContentView.addSubview(self.playersButton)
         
+        self.playersButton.addTarget(self, action: #selector(toSubstitutePlayers), for: .touchUpInside)
+        
         self.playersButton.translatesAutoresizingMaskIntoConstraints = false
         let safe = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -168,4 +170,69 @@ extension MainViewController {
             self.playersButton.heightAnchor.constraint(equalToConstant: 60),
         ])
     }
+    
+    @objc func toSubstitutePlayers() {
+        let vc = SubstitutePlayersViewController()
+        vc.allLiveDatas = self.allLiveDatas
+        vc.delegate = self
+        
+        var size = self.view.bounds.size
+        size.height -= 20
+        size.width = 300
+        vc.preferredContentSize = size
+        vc.view.frame = CGRect(origin: CGPoint(), size: size)
+        
+        vc.isModalInPresentation = true
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+        nav.modalPresentationStyle = .popover
+        
+        self.present(nav, animated: true) {
+            // if you want to prevent toolbar buttons from being active
+            // by setting passthroughViews to nil, you must do it after presentation is complete
+            // I find this annoying; why does the toolbar default to being active?
+            nav.popoverPresentationController?.passthroughViews = nil
+        }
+        
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = self.view
+            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
+            
+            pop.delegate = self
+            
+        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemBlue
+//        appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
+    }
+    
+}
+
+extension MainViewController : UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(
+        _ pop: UIPopoverPresentationController) -> Bool {
+        // 点击：窗口外部，允许消失
+        return pop.presentedViewController.presentedViewController == nil
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ pop: UIPopoverPresentationController) {
+    }
+}
+
+
+extension MainViewController : UINavigationControllerDelegate {
+    // deal with content size change bug
+    // this bug is evident when you tap the Change Size row and navigate back:
+    // the height doesn't change back
+    
+    func navigationController(_ nc: UINavigationController, didShow vc: UIViewController, animated: Bool) {
+        nc.preferredContentSize = vc.preferredContentSize
+    }
+    
 }
