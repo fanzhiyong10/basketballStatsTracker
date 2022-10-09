@@ -113,7 +113,7 @@ class SubstitutePlayersViewController: UITableViewController {
             let title = "Wrong number of players selected: \(self.count_select)"
             let message = "The number of players on the court must be 5, please re-select"
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            
+            alertController.overrideUserInterfaceStyle = .light
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
                                                     style: .cancel,
                                                     handler: nil))

@@ -33,6 +33,16 @@ extension MainViewController {
         return self.allLiveDatas.count
     }
     
+    
+    @objc func tapMyLabel(_ tap: UITapGestureRecognizer) {
+        print("tapMyLabel(_ tap: UITapGestureRecognizer)")
+        guard let myLabel = tap.view as? MyLabel else {
+            return
+        }
+        
+        print("\(myLabel.indexPath!.row)")
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath)
         let inset = UIEdgeInsets.zero
@@ -57,7 +67,8 @@ extension MainViewController {
                 view.backgroundColor = UIColor.white
                 
                 cell.contentView.addSubview(view)
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
+//                let lab = UILabel(frame: aRect)
                 lab.tag = 100
                 lab.font = font
                 lab.text = "PLAYER"
@@ -430,8 +441,15 @@ extension MainViewController {
         let liveData = self.allLiveDatas[indexPath.row]
         
         do {
-            let lab = cell.contentView.viewWithTag(100) as! UILabel
+            let lab = cell.contentView.viewWithTag(100) as! MyLabel
+//            let lab = cell.contentView.viewWithTag(100) as! UILabel
+//            let lab = cell.contentView.viewWithTag(100) as! UITextField
             lab.text = String(liveData.player!)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapMyLabel))
+            lab.addGestureRecognizer(tap)
             
             if liveData.isOnCourt {
                 lab.textColor = .systemGreen
@@ -1106,4 +1124,9 @@ extension MainViewController {
         
         return footerView
     }
+}
+
+
+class MyLabel: UILabel {
+    var indexPath: IndexPath?
 }

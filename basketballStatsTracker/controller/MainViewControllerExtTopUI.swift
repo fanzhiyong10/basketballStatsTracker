@@ -29,6 +29,7 @@ extension MainViewController {
     /// top left
     ///
     /// voice
+    /// - Voice Training
     /// - Voice Button
     /// - voice to text
     func createTopLeft() {
@@ -66,6 +67,22 @@ extension MainViewController {
             self.voiceToTextLabel.widthAnchor.constraint(equalToConstant: 300),
             self.voiceToTextLabel.heightAnchor.constraint(equalToConstant: 40),
         ])
+        
+        // Voice Training
+        let voiceTrainingButton = UIButton()
+        voiceTrainingButton.setTitle("Voice Training", for: .normal)
+        voiceTrainingButton.setTitleColor(.systemBlue, for: .normal)
+        self.topContentView.addSubview(voiceTrainingButton)
+        
+        voiceTrainingButton.addTarget(self, action: #selector(toVoiceTraining), for: .touchUpInside)
+        
+        voiceTrainingButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            voiceTrainingButton.topAnchor.constraint(equalTo: safe.topAnchor, constant: 8),
+            voiceTrainingButton.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 8),
+            voiceTrainingButton.widthAnchor.constraint(equalToConstant: 140),
+            voiceTrainingButton.heightAnchor.constraint(equalToConstant: 30),
+        ])
     }
     
     /// 开始听取指令
@@ -75,14 +92,29 @@ extension MainViewController {
             // status: 启动 -> 停止
             voiceListeningStart = false
             color = UIColor.systemGray
+            
+            self.timerSST?.invalidate()
+            self.speechCommand?.stop()
         } else {
             // status: 停止 -> 启动
             voiceListeningStart = true
             color = UIColor.systemGreen
+            
+            self.speechControl()
         }
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 64)))?.withTintColor(color, renderingMode: .alwaysOriginal)
         self.micImageView.image = image
 
+    }
+    
+    func calGameClock() -> String {
+        let mins = Int(self.game_time_remaining / 60)
+        let secs = Int(self.game_time_remaining - Float(mins * 60))
+        var str = "Game Clock: "
+        str += String(format: "%02d", mins) + "m:"
+        str += String(format: "%02d", secs) + "s"
+        
+        return str
     }
     
     /// top center
@@ -93,8 +125,10 @@ extension MainViewController {
     /// - stop button
     func createTopCenter() {
         // voice to text
+
         self.gameClockLabel = UILabel()
-        self.gameClockLabel.text = "Game Clock: 23m:45s"
+        self.gameClockLabel.text = self.calGameClock()
+//        self.gameClockLabel.text = "Game Clock: 23m:45s"
         self.gameClockLabel.font = UIFont.systemFont(ofSize: 36)
         self.gameClockLabel.textColor = UIColor.systemGreen
         self.gameClockLabel.textAlignment = .center
@@ -115,6 +149,8 @@ extension MainViewController {
         self.startButton.setImage(image, for: .normal)
         self.topContentView.addSubview(self.startButton)
         
+        self.startButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
+        
         self.startButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.startButton.leadingAnchor.constraint(equalTo: safe.centerXAnchor, constant: -180),
@@ -128,6 +164,10 @@ extension MainViewController {
         self.stopButton = UIButton()
         self.stopButton.setImage(image_stop, for: .normal)
         self.topContentView.addSubview(self.stopButton)
+        
+        self.stopButton.isHidden = true
+        
+        self.stopButton.addTarget(self, action: #selector(stopGame), for: .touchUpInside)
         
         self.stopButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -170,6 +210,51 @@ extension MainViewController {
             self.playersButton.heightAnchor.constraint(equalToConstant: 60),
         ])
     }
+    
+    @objc func toVoiceTraining() {
+        print("toVoiceTraining()")
+        
+        let vc = VoiceTextTableViewController()
+        vc.allLiveDatas = self.allLiveDatas
+//        vc.delegate = self
+        
+        var size = self.view.bounds.size
+        size.height -= 20
+        size.width = 500
+        vc.preferredContentSize = size
+        vc.view.frame = CGRect(origin: CGPoint(), size: size)
+        
+        vc.isModalInPresentation = true
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+        nav.modalPresentationStyle = .popover
+        
+        self.present(nav, animated: true) {
+            // if you want to prevent toolbar buttons from being active
+            // by setting passthroughViews to nil, you must do it after presentation is complete
+            // I find this annoying; why does the toolbar default to being active?
+            nav.popoverPresentationController?.passthroughViews = nil
+        }
+        
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = self.view
+            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
+            
+            pop.delegate = self
+            
+        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemBlue
+        appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
+    }
+    
+    
     
     @objc func toSubstitutePlayers() {
         let vc = SubstitutePlayersViewController()

@@ -7,6 +7,36 @@
 
 import UIKit
 
+/**
+ # 延时器
+ 1. 精度：纳秒
+ 2. 异步处理
+ DispatchTime represents a point in time relative to the default clock with nanosecond precision. On Apple platforms, the default clock is based on the Mach absolute time unit.
+ */
+func delay(_ delay:Double, closure:@escaping ()->()) {
+    /**
+     # 当前时间 + 延时（以秒为单位）
+     1. 当前时间：DispatchTime.now()
+     2. 延时数：double，以秒为单位
+     */
+    let when = DispatchTime.now() + delay
+    
+    /**
+     # 延时到后，启动进程
+     1. 线程池，主队列
+     2. DispatchWorkItem：closure
+     
+     DispatchQueue manages the execution of work items. Each work item submitted to a queue is processed on a pool of threads managed by the system.
+     DispatchWorkItem encapsulates work that can be performed. A work item can be dispatched onto a DispatchQueue and within a DispatchGroup. A DispatchWorkItem can also be set as a DispatchSource event, registration, or cancel handler.
+     */
+    DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+}
+
+
+extension Notification.Name {
+    static let voiceCommand = Notification.Name("voiceCommand")
+}
+
 /// main interface
 ///
 /// content: 2 areas
@@ -14,12 +44,57 @@ import UIKit
 /// - tableview
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override var prefersStatusBarHidden: Bool {return true}
+    
+    // game parameter
+    var gameTotalDuration: Float = 48 * 60 // seconds
+    var gameStartTime: Date?
+    var game_time_remaining: Float { return gameTotalDuration - game_cum_duration}
+    var game_cum_duration: Float = 48 * 60 - (23 * 60 + 45) // 比赛进行了多长时间，用于记录。 how long the game was on, for the record
+    
+    // 比赛计时器，每个1秒钟更新一次（重复），1）点击start开始，2）点击stop停止，3）如果game_time_remaining <= 0，停止。
+    // Game timer, updated every 1 second (repeated), 1) hit start to start, 2) hit stop to stop, 3) if game_time_remaining <= 0, stop.
+    var timer_game: Timer?
+    
+    @objc func startGame() {
+        print("startGame()")
+        
+        self.startButton.isHidden = true
+        self.stopButton.isHidden = false
+        
+        // record
+        // 1) game
+        // 2) players on the court
+        
+        self.timer_game = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(calGameCumDuration), userInfo: nil, repeats: true)
+    }
+    
+    @objc func calGameCumDuration() {
+        self.game_cum_duration += 1.0
+        
+        // modify show
+        self.gameClockLabel.text = self.calGameClock()
+    }
+    
+    @objc func stopGame() {
+        print("stopGame()")
+        
+        self.startButton.isHidden = false
+        self.stopButton.isHidden = true
+        
+        // record
+        // 1) game
+        // 2) players on the court
+
+        self.timer_game?.invalidate()
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor = .white
-        self.overrideUserInterfaceStyle = .light
+        self.overrideUserInterfaceStyle = .light // mode
         
         // 加载数据
         self.loadData()
@@ -45,6 +120,62 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
+        self.addSpeechCommand()
+    }
+    
+    var speechCommand: SpeechToMe?
+    
+    // 实际上，就是限制1分钟。因此使用定时器，重复启动
+    var startedSTT = true
+    
+    var timerSST: Timer?
+    
+    // 语音控制
+    func speechControl() {
+        self.speechCommand = SpeechToMe13()
+        
+        // 启动
+        speechCommand?.speechRecognize()
+        
+        // 避免1分钟
+        self.timerSST = Timer.scheduledTimer(timeInterval: 55.0, target: self, selector: #selector(self.fireTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func fireTime()
+    {
+        if(startedSTT) {
+            let info = "到时，startedSTT == true)"
+            print(info)
+            self.speechCommand?.stop()
+            
+            startedSTT = false
+        }
+        
+        // restart it
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.startedSTT = true
+            
+            self.speechCommand = SpeechToMe13()
+            
+            // 启动
+            self.speechCommand?.speechRecognize()
+        }
+    }
+    
+    func speechControlOld() {
+        self.speechCommand = SpeechToMe13()
+        
+        // 启动
+        speechCommand?.speechRecognize()
+    }
+    
+    /// 声控指令
+    private func addSpeechCommand() {
+        NotificationCenter.default.addObserver(self, selector: #selector(processVoiceCommand), name: .voiceCommand, object: nil)
+    }
+    
+    @objc func processVoiceCommand() {
+        print("processVoiceCommand()")
     }
 
     var topContentView: UIView!
@@ -186,6 +317,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     let height_header: CGFloat = 25
     var height_footer: CGFloat = 25
     let width_vertical_divider = CGFloat(1.5)
+    
+    var cell = UITableViewCell()
 
     // Header Words
     let headerWords = ["PLAYER", "NUMBER", "MINUTES", "PER", "POINTS", "FT", "2FG", "3FG", "eFG%", "ASSTS", "OREBS", "DREBS", "STEALS", "BLOCKS", "DEFS", "CHARGES", "TOS"]
