@@ -46,10 +46,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override var prefersStatusBarHidden: Bool {return true}
     
     // game parameter
-    var gameTotalDuration: Float = 48 * 60 // seconds
+//    var gameTotalDuration: Float = 48 * 60 // seconds
     var gameStartTime: Date?
-    var game_time_remaining: Float { return gameTotalDuration - game_cum_duration}
-    var game_cum_duration: Float = 48 * 60 - (23 * 60 + 45) // 比赛进行了多长时间，用于记录。 how long the game was on, for the record
+    var game_time_remaining: Float = 23 * 60 + 45
+//    var game_cum_duration: Float = 48 * 60 - (23 * 60 + 45) // 比赛进行了多长时间，用于记录。 how long the game was on, for the record
     
     // 比赛计时器，每个1秒钟更新一次（重复），1）点击start开始，2）点击stop停止，3）如果game_time_remaining <= 0，停止。
     // Game timer, updated every 1 second (repeated), 1) hit start to start, 2) hit stop to stop, 3) if game_time_remaining <= 0, stop.
@@ -69,7 +69,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func calGameCumDuration() {
-        self.game_cum_duration += 1.0
+//        self.game_cum_duration += 1.0
+        
+        self.game_time_remaining -= 1.0
         
         // modify show
         self.gameClockLabel.text = self.calGameClock()

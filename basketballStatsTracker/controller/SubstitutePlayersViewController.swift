@@ -24,6 +24,8 @@ class SubstitutePlayersViewController: UITableViewController {
         super.viewDidLoad()
 
         self.overrideUserInterfaceStyle = .light
+        
+        self.title = "Players"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
