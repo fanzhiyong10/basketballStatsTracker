@@ -41,6 +41,46 @@ extension MainViewController {
         }
         
         print("\(myLabel.indexPath!.row)")
+        
+        let vc = SetPlayersViewController()
+        vc.liveData = self.allLiveDatas[myLabel.indexPath!.row]
+        vc.indexPath = myLabel.indexPath
+        vc.delegate = self
+        
+        var size = self.view.bounds.size
+        size.height = 200
+        size.width = 500
+        vc.preferredContentSize = size
+        vc.view.frame = CGRect(origin: CGPoint(), size: size)
+        
+        vc.isModalInPresentation = true
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+        nav.modalPresentationStyle = .popover
+        
+        self.present(nav, animated: true) {
+            // if you want to prevent toolbar buttons from being active
+            // by setting passthroughViews to nil, you must do it after presentation is complete
+            // I find this annoying; why does the toolbar default to being active?
+            nav.popoverPresentationController?.passthroughViews = nil
+        }
+        
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = myLabel
+//            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+//            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
+            
+            pop.delegate = self
+            
+        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemBlue
+        appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -53,7 +53,7 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         minutesLabel.text = "Minutes ( 0 ~ 59 )"
         minutesLabel.textAlignment = .center
         minutesLabel.font = font
-        minutesLabel.textColor = .black
+        minutesLabel.textColor = .darkGray
         
         self.view.addSubview(minutesLabel)
         
@@ -71,7 +71,7 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         secondsLabel.text = "Seconds ( 0 ~ 59 )"
         secondsLabel.textAlignment = .center
         secondsLabel.font = font
-        secondsLabel.textColor = .black
+        secondsLabel.textColor = .darkGray
         
         self.view.addSubview(secondsLabel)
         
