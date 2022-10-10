@@ -33,10 +33,6 @@ func delay(_ delay:Double, closure:@escaping ()->()) {
 }
 
 
-extension Notification.Name {
-    static let voiceCommand = Notification.Name("voiceCommand")
-}
-
 /// main interface
 ///
 /// content: 2 areas
@@ -139,6 +135,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.delegate = self
 
         self.addSpeechCommand()
+        
+        // 1: not speech recognize
+        SettingsBundleHelper.saveIsResponseOnSpeechControl(1)
     }
     
     var speechCommand: SpeechToMe?
@@ -148,53 +147,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var timerSST: Timer?
     
-    // 语音控制
-    func speechControl() {
-        self.speechCommand = SpeechToMe13()
-        
-        // 启动
-        speechCommand?.speechRecognize()
-        
-        // 避免1分钟
-        self.timerSST = Timer.scheduledTimer(timeInterval: 55.0, target: self, selector: #selector(self.fireTime), userInfo: nil, repeats: true)
-    }
-    
-    @objc func fireTime()
-    {
-        if(startedSTT) {
-            let info = "到时，startedSTT == true)"
-            print(info)
-            self.speechCommand?.stop()
-            
-            startedSTT = false
-        }
-        
-        // restart it
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.startedSTT = true
-            
-            self.speechCommand = SpeechToMe13()
-            
-            // 启动
-            self.speechCommand?.speechRecognize()
-        }
-    }
-    
-    func speechControlOld() {
-        self.speechCommand = SpeechToMe13()
-        
-        // 启动
-        speechCommand?.speechRecognize()
-    }
-    
-    /// 声控指令
-    private func addSpeechCommand() {
-        NotificationCenter.default.addObserver(self, selector: #selector(processVoiceCommand), name: .voiceCommand, object: nil)
-    }
-    
-    @objc func processVoiceCommand() {
-        print("processVoiceCommand()")
-    }
+
 
     var topContentView: UIView!
     

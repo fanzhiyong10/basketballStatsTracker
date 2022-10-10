@@ -74,6 +74,9 @@ public class SpeechToMe: NSObject {
         command = WordCommandAndNotification(words: SpeechCommandWords.toSteal, notification: .toSteal)
         result.append(command)
         
+        command = WordCommandAndNotification(words: SpeechCommandWords.toBlock, notification: .toBlock)
+        result.append(command)
+        
         command = WordCommandAndNotification(words: SpeechCommandWords.toTip, notification: .toTip)
         result.append(command)
         
@@ -204,7 +207,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                 print(info)
                 
                 if self.isSceneRight() == false {
-                    // 场景：练习中心PlayScoreOfViewController
+                    // scene
                     isFinal = true
                 }
                 
@@ -216,19 +219,31 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                             if containSpeechCommand(strInput: str, word: word) {
                                 // 发出通知
                                 if isFinal == false {
-                                    if word == lastWord {
+                                    if word.lowercased() == lastWord.lowercased() {
                                         if lastTime.timeIntervalSinceNow < -2.0 {
                                             // 大于1秒
                                             lastTime = Date()
                                             if SettingsBundleHelper.fetchIsResponseOnSpeechControl() == 0 {
-                                                NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                                let info = "lastTime.timeIntervalSinceNow < -2.0: " + word
+                                                print(info)
+                                                // process
+                                                if self.saveVoiceCommand(str: str, word: word) {
+                                                    NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                                }
                                             }
                                         }
                                     } else {
                                         lastWord = word
                                         lastTime = Date()
                                         if SettingsBundleHelper.fetchIsResponseOnSpeechControl() == 0 {
-                                            NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                            let info = "lastWord = word: " + word
+                                            print(info)
+                                            
+                                            // process
+                                            if self.saveVoiceCommand(str: str, word: word) {
+                                                NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -283,4 +298,30 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
         self.recognitionTask = nil
     }
     
+    /// (number, command)
+    /// (player, command)
+    func saveVoiceCommand(str: String, word: String) -> Bool {
+        // number, word
+        let arr = str.split(separator: " ")
+        if arr.count < 2 {
+            return false
+        }
+        
+        let count = arr.count
+        for index in 0..<count {
+            let tmp = arr[count - 1 - index]
+            let str_tmp = String(tmp)
+            
+            print(str_tmp)
+            
+            if let aInt = Int(str_tmp) {
+                print("number: \(aInt),\(word)")
+                let voiceCommand = "\(aInt) \(word)"
+                SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
+                return true
+            }
+        }
+        
+        return false
+    }
 }

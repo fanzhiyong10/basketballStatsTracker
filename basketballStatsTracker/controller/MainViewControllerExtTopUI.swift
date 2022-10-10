@@ -95,12 +95,16 @@ extension MainViewController {
             
             self.timerSST?.invalidate()
             self.speechCommand?.stop()
+            
+            SettingsBundleHelper.saveIsResponseOnSpeechControl(1)
         } else {
             // status: 停止 -> 启动
             voiceListeningStart = true
             color = UIColor.systemGreen
             
             self.speechControl()
+            
+            SettingsBundleHelper.saveIsResponseOnSpeechControl(0)
         }
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 64)))?.withTintColor(color, renderingMode: .alwaysOriginal)
         self.micImageView.image = image

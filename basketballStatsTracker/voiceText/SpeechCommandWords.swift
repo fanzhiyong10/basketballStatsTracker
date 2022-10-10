@@ -19,6 +19,7 @@ extension Notification.Name {
     static let toDime = Notification.Name("toDime")
     static let toBad = Notification.Name("toBad")
     static let toSteal = Notification.Name("toSteal")
+    static let toBlock = Notification.Name("toBlock")
     static let toTip = Notification.Name("toTip")
     static let toCharge = Notification.Name("toCharge")
 }

@@ -11,10 +11,27 @@ class SettingsBundleHelper {
     struct SettingsBundleKeys {
         static let wordOfTrainSpeechRecognize = "wordOfTrainSpeechRecognize"
         
-        // 是否响应声控
+        // speech control
         static let isResponseOnSpeechControl = "isResponseOnSpeechControl"
+        
+        // recognize voice command:
+        static let recognizeVoiceCommand = "recognizeVoiceCommand"
     }
     
+    // =====================================
+    class func fetchRecognizeVoiceCommand() -> String? {
+        if let result = UserDefaults.standard.string(forKey: SettingsBundleKeys.recognizeVoiceCommand) {
+            return result
+        } else {
+            return nil
+        }
+    }
+
+    class func saveRecognizeVoiceCommand(_ value: String) {
+        UserDefaults.standard.set(value, forKey: SettingsBundleKeys.recognizeVoiceCommand)
+    }
+
+    // =====================================
     class func fetchWordOfTrainSpeechRecognize() -> String? {
         if let result = UserDefaults.standard.string(forKey: SettingsBundleKeys.wordOfTrainSpeechRecognize) {
             return result
