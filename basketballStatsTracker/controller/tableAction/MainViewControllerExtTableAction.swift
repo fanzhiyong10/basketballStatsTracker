@@ -346,7 +346,7 @@ extension MainViewController {
         
         print("\(myLabel.indexPath!.row)")
         
-        let vc = SetPlayersViewController()
+        let vc = SetDefsViewController()
         vc.liveData = self.allLiveDatas[myLabel.indexPath!.row]
         vc.indexPath = myLabel.indexPath
         vc.delegate = self
