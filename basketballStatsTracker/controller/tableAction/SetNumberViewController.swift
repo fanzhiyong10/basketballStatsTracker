@@ -1,5 +1,5 @@
 //
-//  SetPlayersViewController.swift
+//  SetNumberViewController.swift
 //  basketballStatsTracker
 //
 //  Created by 范志勇 on 2022/10/10.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class SetPlayersViewController: UIViewController, UITextFieldDelegate {
+class SetNumberViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.overrideUserInterfaceStyle = .light
         self.view.backgroundColor = .systemGray6
         
-        self.title = "Set Player"
+        self.title = "Set Number"
 
         // Do any additional setup after loading the view.
         self.createNavigatorBar()
@@ -30,53 +30,53 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    var playerTF: UITextField!
+    var numberTF: UITextField!
     
     /// Player
     func createInterface() {
         let font = UIFont.systemFont(ofSize: 24)
         let fontTF = UIFont.systemFont(ofSize: 48, weight: .bold)
         // label: minutes, seconds
-        let playerLabel = UILabel()
-        playerLabel.text = "Player"
-        playerLabel.textAlignment = .center
-        playerLabel.font = font
-        playerLabel.textColor = .darkGray
+        let numberLabel = UILabel()
+        numberLabel.text = "Number"
+        numberLabel.textAlignment = .center
+        numberLabel.font = font
+        numberLabel.textColor = .darkGray
         
-        self.view.addSubview(playerLabel)
+        self.view.addSubview(numberLabel)
         
-        playerLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
         let safe = self.view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            playerLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
-            playerLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            playerLabel.widthAnchor.constraint(equalTo: safe.widthAnchor),
-            playerLabel.heightAnchor.constraint(equalToConstant: 40)
+            numberLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
+            numberLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            numberLabel.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            numberLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         // The range of minutes is
-        let playerTF = UITextField()
-        playerTF.text = self.liveData?.player
-        playerTF.placeholder = "input player"
-        playerTF.textAlignment = .center
-        playerTF.font = fontTF
-        playerTF.textColor = .systemRed
-        playerTF.adjustsFontSizeToFitWidth = true
-        playerTF.minimumFontSize = 17
-        playerTF.keyboardType = .asciiCapableNumberPad
-        playerTF.delegate = self
+        let numberTF = UITextField()
+        numberTF.text = self.liveData?.number
+        numberTF.placeholder = "input number"
+        numberTF.textAlignment = .center
+        numberTF.font = fontTF
+        numberTF.textColor = .systemRed
+        numberTF.adjustsFontSizeToFitWidth = true
+        numberTF.minimumFontSize = 17
+        numberTF.keyboardType = .asciiCapableNumberPad
+        numberTF.delegate = self
         
-        self.playerTF = playerTF
-        self.view.addSubview(playerTF)
+        self.numberTF = numberTF
+        self.view.addSubview(numberTF)
         
-        playerTF.translatesAutoresizingMaskIntoConstraints = false
+        numberTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            playerTF.topAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: 12),
-            playerTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            playerTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
-            playerTF.heightAnchor.constraint(equalToConstant: 60)
+            numberTF.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 12),
+            numberTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            numberTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            numberTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         
     }
@@ -115,11 +115,11 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
     /// action
     /// 1. 验证选中的是5个，如果不是5个，则提示弹窗，继续选择
     @objc func doneSelected() {
-        guard let tmp_player = self.playerTF.text, tmp_player.count < 10 else {
+        guard let tmp_number = self.numberTF.text else {
             return
         }
         
-        self.liveData?.player = tmp_player
+        self.liveData?.number = tmp_number
 
         guard self.validSelect() else {
             // alert error
@@ -140,7 +140,7 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
     /// alert selected error
     func alertSelectedError() {
         DispatchQueue.main.async {
-            let title = "Wrong Player"
+            let title = "Number cannot be empty"
             let message = ""
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
@@ -154,27 +154,27 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
     
     var liveData: LiveData?
     var indexPath: IndexPath?
-    weak var delegate: SetPlayersDelegate?
+    weak var delegate: SetNumberDelegate?
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         if self.doneIsRight {
-            self.delegate?.doSetPlayer(liveData!, indexPath!)
+            self.delegate?.doSetNumber(liveData!, indexPath!)
         }
     }
 
 }
 
 
-protocol SetPlayersDelegate: AnyObject {
-    func doSetPlayer(_ liveData: LiveData, _ indexPath: IndexPath)
+protocol SetNumberDelegate: AnyObject {
+    func doSetNumber(_ liveData: LiveData, _ indexPath: IndexPath)
 }
 
-extension MainViewController: SetPlayersDelegate {
-    func doSetPlayer(_ liveData: LiveData, _ indexPath: IndexPath) {
+extension MainViewController: SetNumberDelegate {
+    func doSetNumber(_ liveData: LiveData, _ indexPath: IndexPath) {
         DispatchQueue.main.async {
-            self.allLiveDatas[indexPath.row].player = liveData.player
+            self.allLiveDatas[indexPath.row].number = liveData.number
             
             // modify show
             self.tableView.reloadData()

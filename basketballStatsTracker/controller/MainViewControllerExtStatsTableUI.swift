@@ -34,54 +34,7 @@ extension MainViewController {
     }
     
     
-    @objc func tapMyLabel(_ tap: UITapGestureRecognizer) {
-        print("tapMyLabel(_ tap: UITapGestureRecognizer)")
-        guard let myLabel = tap.view as? MyLabel else {
-            return
-        }
-        
-        print("\(myLabel.indexPath!.row)")
-        
-        let vc = SetPlayersViewController()
-        vc.liveData = self.allLiveDatas[myLabel.indexPath!.row]
-        vc.indexPath = myLabel.indexPath
-        vc.delegate = self
-        
-        var size = self.view.bounds.size
-        size.height = 200
-        size.width = 500
-        vc.preferredContentSize = size
-        vc.view.frame = CGRect(origin: CGPoint(), size: size)
-        
-        vc.isModalInPresentation = true
-        
-        let nav = UINavigationController(rootViewController: vc)
-        
-        nav.modalPresentationStyle = .popover
-        
-        self.present(nav, animated: true) {
-            // if you want to prevent toolbar buttons from being active
-            // by setting passthroughViews to nil, you must do it after presentation is complete
-            // I find this annoying; why does the toolbar default to being active?
-            nav.popoverPresentationController?.passthroughViews = nil
-        }
-        
-        if let pop = nav.popoverPresentationController {
-            pop.sourceView = myLabel
-//            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-//            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
-            
-            pop.delegate = self
-            
-        }
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBlue
-        appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
-        nav.navigationBar.standardAppearance = appearance
-        nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
-    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath)
@@ -108,7 +61,6 @@ extension MainViewController {
                 
                 cell.contentView.addSubview(view)
                 let lab = MyLabel(frame: aRect)
-//                let lab = UILabel(frame: aRect)
                 lab.tag = 100
                 lab.font = font
                 lab.text = "PLAYER"
@@ -120,7 +72,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 101
                 lab.font = font
                 lab.text = "NUMBER"
@@ -482,13 +434,11 @@ extension MainViewController {
         
         do {
             let lab = cell.contentView.viewWithTag(100) as! MyLabel
-//            let lab = cell.contentView.viewWithTag(100) as! UILabel
-//            let lab = cell.contentView.viewWithTag(100) as! UITextField
             lab.text = String(liveData.player!)
             
             lab.indexPath = indexPath
             lab.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(tapMyLabel))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapPlayer))
             lab.addGestureRecognizer(tap)
             
             if liveData.isOnCourt {
@@ -505,8 +455,13 @@ extension MainViewController {
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(101) as! UILabel
+            let lab = cell.contentView.viewWithTag(101) as! MyLabel
             lab.text = String(liveData.number!)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapNumber))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
