@@ -111,6 +111,19 @@ extension MainViewController {
 
     }
     
+    func stopVoiceListening() {
+        voiceListeningStart = false
+        let color = UIColor.systemGray
+        
+        self.timerSST?.invalidate()
+        self.speechCommand?.stop()
+        
+        SettingsBundleHelper.saveIsResponseOnSpeechControl(1)
+        
+        let image = UIImage(systemName: "mic.circle.fill", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 64)))?.withTintColor(color, renderingMode: .alwaysOriginal)
+        self.micImageView.image = image
+    }
+    
     func calGameClock() -> String {
         let mins = Int(self.game_time_remaining / 60)
         let secs = Int(self.game_time_remaining - Float(mins * 60))
@@ -264,8 +277,15 @@ extension MainViewController {
         }
     }
     
+    ///voice training
+    ///
+    /// guard condition:
+    /// - stop voice listening
     @objc func toVoiceTraining() {
         print("toVoiceTraining()")
+        
+        // guard
+        self.stopVoiceListening()
         
         let vc = VoiceTextTableViewController()
         vc.allLiveDatas = self.allLiveDatas
