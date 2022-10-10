@@ -51,8 +51,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Game timer, updated every 1 second (repeated), 1) hit start to start, 2) hit stop to stop, 3) if game_time_remaining <= 0, stop.
     var timer_game: Timer?
     
+    /// start game
+    ///
+    /// guard
+    /// - game_time_remaining > 0
     @objc func startGame() {
         print("startGame()")
+        
+        guard self.game_time_remaining > 0 else {
+            self.alertStartGame()
+            return
+        }
         
         self.startButton.isHidden = true
         self.stopButton.isHidden = false
@@ -64,6 +73,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.timer_game = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
     }
     
+    /// game_time_remaining
+    func alertStartGame() {
+        DispatchQueue.main.async {
+            let title = "Please Set Game Clock"
+            let message = "Game Clock > 0 when start"
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.overrideUserInterfaceStyle = .light
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
+                                                    style: .cancel,
+                                                    handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     @objc func countDown() {
 //        self.game_cum_duration += 1.0
         DispatchQueue.main.async {
@@ -73,6 +97,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.gameClockButton.setAttributedTitle(title, for: .normal)
             
             self.countUpPlayersOnCourt()
+            
+            if self.game_time_remaining <= 0 {
+                self.stopGame()
+            }
         }
     }
     
