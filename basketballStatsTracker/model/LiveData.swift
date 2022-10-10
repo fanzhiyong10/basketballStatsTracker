@@ -137,476 +137,492 @@ struct LiveData {
     var isOnCourt = false
 
     static func createData() -> [LiveData] {
-        var feedBacks = [LiveData]()
+        var liveDatas = [LiveData]()
         
-        var feedBack = LiveData()
-        feedBack.player = "Ben"
-        feedBack.number = "23"
-        feedBack.time_cumulative = 240
-        feedBack.ft_make_count = 4
-        feedBack.ft_miss_count = 4
+        var liveData = LiveData()
+        liveData.player = "Ben"
+        liveData.number = "23"
+        liveData.time_cumulative = 240
+        liveData.ft_make_count = 4
+        liveData.ft_miss_count = 4
 
-        feedBack.fg2_make_count = 7
-        feedBack.fg2_miss_count = 5
+        liveData.fg2_make_count = 7
+        liveData.fg2_miss_count = 5
         
-        feedBack.fg3_make_count = 3
-        feedBack.fg3_miss_count = 7
+        liveData.fg3_make_count = 3
+        liveData.fg3_miss_count = 7
         
-        feedBack.assts_count = 1
-        feedBack.orebs_count = 1
-        feedBack.drebs_count = 1
-        feedBack.steals_count = 1
-        feedBack.blocks_count = 1
-        feedBack.defs_count = 1
-        feedBack.charges_count = 1
-        feedBack.tos_count = 1
-        feedBacks.append(feedBack)
+        liveData.assts_count = 1
+        liveData.orebs_count = 1
+        liveData.drebs_count = 1
+        liveData.steals_count = 1
+        liveData.blocks_count = 1
+        liveData.defs_count = 1
+        liveData.charges_count = 1
+        liveData.tos_count = 1
+        liveDatas.append(liveData)
         
 
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Dusty"
-            feedBack.number = "34"
-            feedBack.time_cumulative = 203
-            feedBack.ft_make_count = 3
-            feedBack.ft_miss_count = 7
+            var liveData = LiveData()
+            liveData.player = "Dusty"
+            liveData.number = "34"
+            liveData.time_cumulative = 203
+            liveData.ft_make_count = 3
+            liveData.ft_miss_count = 7
 
-            feedBack.fg2_make_count = 4
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 4
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 6
-            feedBack.fg3_miss_count = 7
+            liveData.fg3_make_count = 6
+            liveData.fg3_miss_count = 7
             
-            feedBack.assts_count = 2
-            feedBack.orebs_count = 2
-            feedBack.drebs_count = 2
-            feedBack.steals_count = 2
-            feedBack.blocks_count = 2
-            feedBack.defs_count = 2
-            feedBack.charges_count = 2
-            feedBack.tos_count = 2
+            liveData.assts_count = 2
+            liveData.orebs_count = 2
+            liveData.drebs_count = 2
+            liveData.steals_count = 2
+            liveData.blocks_count = 2
+            liveData.defs_count = 2
+            liveData.charges_count = 2
+            liveData.tos_count = 2
             
-            feedBack.isOnCourt = false
+            liveData.isOnCourt = false
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Dante"
-            feedBack.number = "22"
-            feedBack.time_cumulative = 6 * 60 + 33
-            feedBack.ft_make_count = 4
-            feedBack.ft_miss_count = 6
+            var liveData = LiveData()
+            liveData.player = "Dante"
+            liveData.number = "22"
+            liveData.time_cumulative = 6 * 60 + 33
+            liveData.ft_make_count = 4
+            liveData.ft_miss_count = 6
 
-            feedBack.fg2_make_count = 5
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 5
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 3
-            feedBack.orebs_count = 3
-            feedBack.drebs_count = 3
-            feedBack.steals_count = 3
-            feedBack.blocks_count = 3
-            feedBack.defs_count = 3
-            feedBack.charges_count = 3
-            feedBack.tos_count = 3
+            liveData.assts_count = 3
+            liveData.orebs_count = 3
+            liveData.drebs_count = 3
+            liveData.steals_count = 3
+            liveData.blocks_count = 3
+            liveData.defs_count = 3
+            liveData.charges_count = 3
+            liveData.tos_count = 3
             
-            feedBack.isOnCourt = true
+            liveData.isOnCourt = true
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Reid"
-            feedBack.number = "11"
-            feedBack.time_cumulative = 8 * 60 + 23
-            feedBack.ft_make_count = 5
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Reid"
+            liveData.number = "11"
+            liveData.time_cumulative = 8 * 60 + 23
+            liveData.ft_make_count = 5
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 3
-            feedBack.fg2_miss_count = 12
+            liveData.fg2_make_count = 3
+            liveData.fg2_miss_count = 12
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Jerrod"
-            feedBack.number = "55"
-            feedBack.time_cumulative = 4 * 60 + 34
-            feedBack.ft_make_count = 4
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Jerrod"
+            liveData.number = "55"
+            liveData.time_cumulative = 4 * 60 + 34
+            liveData.ft_make_count = 4
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 4
-            feedBack.fg3_miss_count = 8
+            liveData.fg3_make_count = 4
+            liveData.fg3_miss_count = 8
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
             
-            feedBack.isOnCourt = true
+            liveData.isOnCourt = true
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Jayden"
-            feedBack.number = "66"
-            feedBack.time_cumulative = 2 * 60 + 22
-            feedBack.ft_make_count = 6
-            feedBack.ft_miss_count = 7
+            var liveData = LiveData()
+            liveData.player = "Jayden"
+            liveData.number = "66"
+            liveData.time_cumulative = 2 * 60 + 22
+            liveData.ft_make_count = 6
+            liveData.ft_miss_count = 7
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
             
-            feedBack.isOnCourt = true
+            liveData.isOnCourt = true
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Luka"
-            feedBack.number = "77"
-            feedBack.time_cumulative = 5 * 60 + 30
-            feedBack.ft_make_count = 7
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Luka"
+            liveData.number = "77"
+            liveData.time_cumulative = 5 * 60 + 30
+            liveData.ft_make_count = 7
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Blas"
-            feedBack.number = "88"
-            feedBack.time_cumulative = 4 * 60
-            feedBack.ft_make_count = 4
-            feedBack.ft_miss_count = 8
+            var liveData = LiveData()
+            liveData.player = "Blas"
+            liveData.number = "88"
+            liveData.time_cumulative = 4 * 60
+            liveData.ft_make_count = 4
+            liveData.ft_miss_count = 8
 
-            feedBack.fg2_make_count = 4
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 4
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
             
-            feedBack.isOnCourt = true
+            liveData.isOnCourt = true
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Aaron"
-            feedBack.number = "99"
-            feedBack.time_cumulative = 3 * 60 + 23
-            feedBack.ft_make_count = 5
-            feedBack.ft_miss_count = 8
+            var liveData = LiveData()
+            liveData.player = "Aaron"
+            liveData.number = "99"
+            liveData.time_cumulative = 3 * 60 + 23
+            liveData.ft_make_count = 5
+            liveData.ft_miss_count = 8
 
-            feedBack.fg2_make_count = 5
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 5
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 4
-            feedBack.fg3_miss_count = 8
+            liveData.fg3_make_count = 4
+            liveData.fg3_miss_count = 8
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Ethan"
-            feedBack.number = "98"
-            feedBack.time_cumulative = 4 * 60
-            feedBack.ft_make_count = 3
-            feedBack.ft_miss_count = 12
+            var liveData = LiveData()
+            liveData.player = "Ethan"
+            liveData.number = "98"
+            liveData.time_cumulative = 4 * 60
+            liveData.ft_make_count = 3
+            liveData.ft_miss_count = 12
 
-            feedBack.fg2_make_count = 3
-            feedBack.fg2_miss_count = 12
+            liveData.fg2_make_count = 3
+            liveData.fg2_miss_count = 12
             
-            feedBack.fg3_make_count = 3
-            feedBack.fg3_miss_count = 7
+            liveData.fg3_make_count = 3
+            liveData.fg3_miss_count = 7
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
             
-            feedBack.isOnCourt = true
+            liveData.isOnCourt = true
             
-            feedBacks.append(feedBack)
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Tyler"
-            feedBack.number = "76"
-            feedBack.time_cumulative = 3 * 60 + 23
-            feedBack.ft_make_count = 7
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Tyler"
+            liveData.number = "76"
+            liveData.time_cumulative = 3 * 60 + 23
+            liveData.ft_make_count = 7
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 6
-            feedBack.fg3_miss_count = 7
+            liveData.fg3_make_count = 6
+            liveData.fg3_miss_count = 7
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Logan"
-            feedBack.number = "54"
-            feedBack.time_cumulative = 6 * 60 + 33
-            feedBack.ft_make_count = 7
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Logan"
+            liveData.number = "54"
+            liveData.time_cumulative = 6 * 60 + 33
+            liveData.ft_make_count = 7
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Lucas"
-            feedBack.number = "32"
-            feedBack.time_cumulative = 8 * 60 + 23
-            feedBack.ft_make_count = 4
-            feedBack.ft_miss_count = 8
+            var liveData = LiveData()
+            liveData.player = "Lucas"
+            liveData.number = "32"
+            liveData.time_cumulative = 8 * 60 + 23
+            liveData.ft_make_count = 4
+            liveData.ft_miss_count = 8
 
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Sam"
-            feedBack.number = "96"
-            feedBack.time_cumulative = 4 * 60 + 34
-            feedBack.ft_make_count = 7
-            feedBack.ft_miss_count = 5
+            var liveData = LiveData()
+            liveData.player = "Sam"
+            liveData.number = "96"
+            liveData.time_cumulative = 4 * 60 + 34
+            liveData.ft_make_count = 7
+            liveData.ft_miss_count = 5
 
-            feedBack.fg2_make_count = 4
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 4
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 4
-            feedBack.fg3_miss_count = 8
+            liveData.fg3_make_count = 4
+            liveData.fg3_miss_count = 8
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Caleb"
-            feedBack.number = "84"
-            feedBack.time_cumulative = 2 * 60 + 22
-            feedBack.ft_make_count = 4
-            feedBack.ft_miss_count = 8
+            var liveData = LiveData()
+            liveData.player = "Caleb"
+            liveData.number = "84"
+            liveData.time_cumulative = 2 * 60 + 22
+            liveData.ft_make_count = 4
+            liveData.ft_miss_count = 8
 
-            feedBack.fg2_make_count = 5
-            feedBack.fg2_miss_count = 8
+            liveData.fg2_make_count = 5
+            liveData.fg2_miss_count = 8
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
         
         do {
-            var feedBack = LiveData()
-            feedBack.player = "Bryson"
-            feedBack.number = "83"
-            feedBack.time_cumulative = 5 * 60 + 30
-            feedBack.ft_make_count = 5
-            feedBack.ft_miss_count = 8
+            var liveData = LiveData()
+            liveData.player = "Bryson"
+            liveData.number = "83"
+            liveData.time_cumulative = 5 * 60 + 30
+            liveData.ft_make_count = 5
+            liveData.ft_miss_count = 8
 
-            feedBack.fg2_make_count = 3
-            feedBack.fg2_miss_count = 12
+            liveData.fg2_make_count = 3
+            liveData.fg2_miss_count = 12
             
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
             
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
-        }
-                
-        do {
-            var feedBack = LiveData()
-            feedBack.player = "Matthew"
-            feedBack.number = "62"
-            feedBack.time_cumulative = 5 * 60 + 30
-            feedBack.ft_make_count = 3
-            feedBack.ft_miss_count = 12
-
-            feedBack.fg2_make_count = 7
-            feedBack.fg2_miss_count = 5
-            
-            feedBack.fg3_make_count = 7
-            feedBack.fg3_miss_count = 5
-            
-            feedBack.assts_count = 4
-            feedBack.orebs_count = 4
-            feedBack.drebs_count = 4
-            feedBack.steals_count = 4
-            feedBack.blocks_count = 4
-            feedBack.defs_count = 4
-            feedBack.charges_count = 4
-            feedBack.tos_count = 4
-            feedBacks.append(feedBack)
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
         }
                 
-        return feedBacks
+        do {
+            var liveData = LiveData()
+            liveData.player = "Matthew"
+            liveData.number = "62"
+            liveData.time_cumulative = 5 * 60 + 30
+            liveData.ft_make_count = 3
+            liveData.ft_miss_count = 12
+
+            liveData.fg2_make_count = 7
+            liveData.fg2_miss_count = 5
+            
+            liveData.fg3_make_count = 7
+            liveData.fg3_miss_count = 5
+            
+            liveData.assts_count = 4
+            liveData.orebs_count = 4
+            liveData.drebs_count = 4
+            liveData.steals_count = 4
+            liveData.blocks_count = 4
+            liveData.defs_count = 4
+            liveData.charges_count = 4
+            liveData.tos_count = 4
+            liveDatas.append(liveData)
+        }
+                
+        return liveDatas
     }
     
     static func createTotalData() -> LiveData {
-        var feedBack = LiveData()
-        feedBack.player = "TOTALS"
-        feedBack.number = ""
-        feedBack.time_cumulative = 86*60+23
-        feedBack.ft_make_count = 4
-        feedBack.ft_miss_count = 4
+        var liveData = LiveData()
+        liveData.player = "TOTALS"
+        liveData.number = ""
+        liveData.time_cumulative = 86*60+23
+        liveData.ft_make_count = 4
+        liveData.ft_miss_count = 4
 
-        feedBack.fg2_make_count = 7
-        feedBack.fg2_miss_count = 5
+        liveData.fg2_make_count = 7
+        liveData.fg2_miss_count = 5
         
-        feedBack.fg3_make_count = 3
-        feedBack.fg3_miss_count = 7
+        liveData.fg3_make_count = 3
+        liveData.fg3_miss_count = 7
         
-        feedBack.assts_count = 1
-        feedBack.orebs_count = 1
-        feedBack.drebs_count = 1
-        feedBack.steals_count = 1
-        feedBack.blocks_count = 1
-        feedBack.defs_count = 1
-        feedBack.charges_count = 1
-        feedBack.tos_count = 1
+        liveData.assts_count = 1
+        liveData.orebs_count = 1
+        liveData.drebs_count = 1
+        liveData.steals_count = 1
+        liveData.blocks_count = 1
+        liveData.defs_count = 1
+        liveData.charges_count = 1
+        liveData.tos_count = 1
         
-        return feedBack
+        return liveData
+    }
+    
+    static func newGameData() -> [LiveData] {
+        let liveDatas_tmp = createData()
+        
+        var liveDatas_new = [LiveData]()
+        for tmp in liveDatas_tmp {
+            var ld = LiveData()
+            ld.player = tmp.player
+            ld.number = tmp.number
+            ld.isOnCourt = tmp.isOnCourt
+            
+            liveDatas_new.append(ld)
+        }
+        
+        return liveDatas_new
     }
 }

@@ -88,6 +88,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+        self.processTotalData()
+        
         self.tableView.reloadData()
     }
     
@@ -240,6 +242,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadData() {
         self.allLiveDatas = LiveData.createData()
         
+        self.processTotalData()
+    }
+    
+    func processTotalData() {
         self.totalData = LiveData()
         self.totalData?.player = "TOTALS"
         self.totalData?.number = ""
@@ -293,13 +299,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.totalData?.defs_count = defs_count
         self.totalData?.charges_count = charges_count
         self.totalData?.tos_count = tos_count
-        /*
-        self.allFeedBacks = [FeedBack]()
-
-        if let feedbacks = DAOOfMelfNote.searchAllMelfFeedBacks(id_subject: (self.subject?.id_subject)!) {
-            self.allFeedBacks = feedbacks
-        }
-        */
     }
 
     /// tableview

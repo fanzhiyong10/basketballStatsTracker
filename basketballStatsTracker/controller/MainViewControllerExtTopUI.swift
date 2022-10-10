@@ -235,6 +235,29 @@ extension MainViewController {
     
     @objc func doNewGame() {
         print("doNewGame")
+        
+        let liveDatas_previous = self.allLiveDatas
+        
+        self.allLiveDatas = [LiveData]()
+        
+        for tmp in liveDatas_previous {
+            var ld = LiveData()
+            ld.player = tmp.player
+            ld.number = tmp.number
+            ld.isOnCourt = tmp.isOnCourt
+            
+            self.allLiveDatas.append(ld)
+        }
+        
+        self.processTotalData()
+        
+        self.tableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.game_time_remaining = 40 * 60
+            let title = self.processGameClockTitle()
+            self.gameClockButton.setAttributedTitle(title, for: .normal)
+        }
     }
     
     @objc func toVoiceTraining() {
