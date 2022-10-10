@@ -170,7 +170,7 @@ class SetAsstsViewController: UIViewController, UITextFieldDelegate {
     /// alert selected error
     func alertSelectedError() {
         DispatchQueue.main.async {
-            let title = "Assts_count cannot be less than 0"
+            let title = "Assts cannot be less than 0"
             let message = ""
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
