@@ -228,7 +228,7 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
     func alertSelectedError() {
         DispatchQueue.main.async {
             let title = "Wrong Game Clock"
-            let message = "Game Clock must be greater than 0."
+            let message = "1) Game Clock must be greater than 0. \n2) Minutes' value is 0~59.\n3) Seconds' value is 0~59"
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
@@ -263,7 +263,8 @@ extension MainViewController: SetGameClockDelegate {
             self.game_time_remaining = Float(minutes * 60 + seconds)
             
             // modify show
-            self.gameClockLabel.text = self.calGameClock()
+            let title = self.processGameClockTitle()
+            self.gameClockButton.setAttributedTitle(title, for: .normal)
         }
     }
 }

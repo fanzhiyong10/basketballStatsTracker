@@ -117,6 +117,13 @@ extension MainViewController {
         return str
     }
     
+    func processGameClockTitle() -> NSMutableAttributedString {
+        let para = NSMutableParagraphStyle()
+        para.alignment = .center
+        let title = NSMutableAttributedString(string: self.calGameClock(), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 36), NSAttributedString.Key.foregroundColor: UIColor.systemGreen, NSAttributedString.Key.paragraphStyle: para])
+        
+        return title
+    }
     /// top center
     ///
     /// time
@@ -124,27 +131,21 @@ extension MainViewController {
     /// - start button
     /// - stop button
     func createTopCenter() {
-        // voice to text
-
-        self.gameClockLabel = UILabel()
-        self.gameClockLabel.text = self.calGameClock()
-//        self.gameClockLabel.text = "Game Clock: 23m:45s"
-        self.gameClockLabel.font = UIFont.systemFont(ofSize: 36)
-        self.gameClockLabel.textColor = UIColor.systemGreen
-        self.gameClockLabel.textAlignment = .center
-        self.topContentView.addSubview(self.gameClockLabel)
+        // Game Clock
+        let title = self.processGameClockTitle()
         
-        self.gameClockLabel.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapGamClock))
-        self.gameClockLabel.addGestureRecognizer(tap)
+        self.gameClockButton = UIButton()
+        self.gameClockButton.setAttributedTitle(title, for: .normal)
+        self.topContentView.addSubview(self.gameClockButton)
+        self.gameClockButton.addTarget(self, action: #selector(tapGamClock), for: .touchUpInside)
         
-        self.gameClockLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.gameClockButton.translatesAutoresizingMaskIntoConstraints = false
         let safe = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.gameClockLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
-            self.gameClockLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 12),
-            self.gameClockLabel.widthAnchor.constraint(equalToConstant: 400),
-            self.gameClockLabel.heightAnchor.constraint(equalToConstant: 40),
+            self.gameClockButton.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            self.gameClockButton.topAnchor.constraint(equalTo: safe.topAnchor, constant: 12),
+            self.gameClockButton.widthAnchor.constraint(equalToConstant: 400),
+            self.gameClockButton.heightAnchor.constraint(equalToConstant: 40),
         ])
         
         // start button
@@ -158,7 +159,7 @@ extension MainViewController {
         self.startButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.startButton.leadingAnchor.constraint(equalTo: safe.centerXAnchor, constant: -180),
-            self.startButton.topAnchor.constraint(equalTo: self.gameClockLabel.bottomAnchor, constant: 12),
+            self.startButton.topAnchor.constraint(equalTo: self.gameClockButton.bottomAnchor, constant: 12),
             self.startButton.widthAnchor.constraint(equalToConstant: 50),
             self.startButton.heightAnchor.constraint(equalToConstant: 50),
         ])
@@ -184,11 +185,29 @@ extension MainViewController {
     
     /// top right
     ///
-    /// players
-    /// - Game Clock
-    /// - start button
-    /// - stop button
+    /// content
+    /// - New Game
+    /// - players
     func createTopRight() {
+        // New Game
+        let newGameButton = UIButton()
+        newGameButton.setTitle("New Game", for: .normal)
+        newGameButton.setTitleColor(.systemBlue, for: .normal)
+        self.topContentView.addSubview(newGameButton)
+        
+        newGameButton.addTarget(self, action: #selector(doNewGame), for: .touchUpInside)
+        
+        newGameButton.translatesAutoresizingMaskIntoConstraints = false
+        let safe = self.view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            newGameButton.topAnchor.constraint(equalTo: safe.topAnchor, constant: 8),
+            newGameButton.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -12),
+            newGameButton.widthAnchor.constraint(equalToConstant: 140),
+            newGameButton.heightAnchor.constraint(equalToConstant: 30),
+        ])
+        
+        // players
         let title = NSMutableAttributedString(string:"PLAYERS", attributes:[
             .font: UIFont.systemFont(ofSize: 36),
             .foregroundColor: UIColor.white
@@ -206,13 +225,16 @@ extension MainViewController {
         self.playersButton.addTarget(self, action: #selector(toSubstitutePlayers), for: .touchUpInside)
         
         self.playersButton.translatesAutoresizingMaskIntoConstraints = false
-        let safe = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             self.playersButton.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -12),
-            self.playersButton.topAnchor.constraint(equalTo: safe.topAnchor, constant: 30),
+            self.playersButton.topAnchor.constraint(equalTo: safe.topAnchor, constant: 60),
             self.playersButton.widthAnchor.constraint(equalToConstant: 190),
-            self.playersButton.heightAnchor.constraint(equalToConstant: 60),
+            self.playersButton.heightAnchor.constraint(equalToConstant: 55),
         ])
+    }
+    
+    @objc func doNewGame() {
+        print("doNewGame")
     }
     
     @objc func toVoiceTraining() {
@@ -326,7 +348,7 @@ extension MainViewController {
         }
         
         if let pop = nav.popoverPresentationController {
-            pop.sourceView = self.gameClockLabel
+            pop.sourceView = self.gameClockButton
 //            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
 //            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
             

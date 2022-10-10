@@ -65,16 +65,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // 1) game
         // 2) players on the court
         
-        self.timer_game = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(calGameCumDuration), userInfo: nil, repeats: true)
+        self.timer_game = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
     }
     
-    @objc func calGameCumDuration() {
+    @objc func countDown() {
 //        self.game_cum_duration += 1.0
+        DispatchQueue.main.async {
+            self.game_time_remaining -= 1.0
+            
+            let title = self.processGameClockTitle()
+            self.gameClockButton.setAttributedTitle(title, for: .normal)
+            
+            self.countUpPlayersOnCourt()
+        }
+    }
+    
+    func countUpPlayersOnCourt() {
+        // players on court
+        for (index, liveData) in self.allLiveDatas.enumerated() {
+            if liveData.isOnCourt {
+                self.allLiveDatas[index].time_cumulative += 1.0
+            }
+        }
         
-        self.game_time_remaining -= 1.0
-        
-        // modify show
-        self.gameClockLabel.text = self.calGameClock()
+        self.tableView.reloadData()
     }
     
     @objc func stopGame() {
@@ -202,7 +216,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var voiceToTextLabel: UILabel! // voice to text
     
     // Game Clock
-    var gameClockLabel: UILabel!
+//    var gameClockLabel: UILabel!
+    var gameClockButton: UIButton!
     var startButton: UIButton!
     var stopButton: UIButton!
 
