@@ -65,6 +65,7 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
         playerTF.adjustsFontSizeToFitWidth = true
         playerTF.minimumFontSize = 17
 //        playerTF.keyboardType = .asciiCapableNumberPad
+        playerTF.clearButtonMode = .whileEditing
         playerTF.delegate = self
         
         self.playerTF = playerTF
@@ -74,8 +75,8 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             playerTF.topAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: 12),
-            playerTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            playerTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            playerTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 20),
+            playerTF.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -20),
             playerTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         

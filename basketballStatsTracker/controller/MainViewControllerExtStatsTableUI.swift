@@ -164,7 +164,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 105
                 lab.font = font
                 lab.text = "ft"
@@ -188,7 +188,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 106
                 lab.font = font
                 lab.text = "fg2"
@@ -212,7 +212,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 107
                 lab.font = font
                 lab.text = "fg3"
@@ -259,7 +259,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 109
                 lab.font = font
                 lab.text = "assts"
@@ -282,7 +282,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 110
                 lab.font = font
                 lab.text = "orebs"
@@ -305,7 +305,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 111
                 lab.font = font
                 lab.text = "drebs"
@@ -328,7 +328,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 112
                 lab.font = font
                 lab.text = "steals"
@@ -351,7 +351,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 113
                 lab.font = font
                 lab.text = "blocks"
@@ -374,7 +374,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 114
                 lab.font = font
                 lab.text = "defs"
@@ -397,7 +397,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 115
                 lab.font = font
                 lab.text = "charges"
@@ -420,7 +420,7 @@ extension MainViewController {
             do {
                 aRect.origin.x += width
                 
-                let lab = UILabel(frame: aRect)
+                let lab = MyLabel(frame: aRect)
                 lab.tag = 116
                 lab.font = font
                 lab.text = "tos"
@@ -480,18 +480,33 @@ extension MainViewController {
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(105) as! UILabel
+            let lab = cell.contentView.viewWithTag(105) as! MyLabel
             lab.text = String(liveData.ft)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapFT))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(106) as! UILabel
+            let lab = cell.contentView.viewWithTag(106) as! MyLabel
             lab.text = String(liveData.fg2)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapFG2))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(107) as! UILabel
+            let lab = cell.contentView.viewWithTag(107) as! MyLabel
             lab.text = String(liveData.fg3)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapFG3))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
@@ -500,43 +515,83 @@ extension MainViewController {
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(109) as! UILabel
+            let lab = cell.contentView.viewWithTag(109) as! MyLabel
             lab.text = String(liveData.assts)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapAssts))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(110) as! UILabel
+            let lab = cell.contentView.viewWithTag(110) as! MyLabel
             lab.text = String(liveData.orebs)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapOrebs))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(111) as! UILabel
+            let lab = cell.contentView.viewWithTag(111) as! MyLabel
             lab.text = String(liveData.drebs)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapDrebs))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(112) as! UILabel
+            let lab = cell.contentView.viewWithTag(112) as! MyLabel
             lab.text = String(liveData.steals)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapSteals))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(113) as! UILabel
+            let lab = cell.contentView.viewWithTag(113) as! MyLabel
             lab.text = String(liveData.blocks)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapBlocks))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(114) as! UILabel
+            let lab = cell.contentView.viewWithTag(114) as! MyLabel
             lab.text = String(liveData.defs)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapDefs))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(115) as! UILabel
+            let lab = cell.contentView.viewWithTag(115) as! MyLabel
             lab.text = String(liveData.charges)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapCharges))
+            lab.addGestureRecognizer(tap)
         }
         
         do {
-            let lab = cell.contentView.viewWithTag(116) as! UILabel
+            let lab = cell.contentView.viewWithTag(116) as! MyLabel
             lab.text = String(liveData.tos)
+            
+            lab.indexPath = indexPath
+            lab.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapTos))
+            lab.addGestureRecognizer(tap)
         }
         
 

@@ -17,6 +17,14 @@
 		66A667A628F3B9DA000DDE11 /* SetPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A528F3B9DA000DDE11 /* SetPlayersViewController.swift */; };
 		66A667A828F3C226000DDE11 /* SetNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A728F3C226000DDE11 /* SetNumberViewController.swift */; };
 		66A667AA28F3C592000DDE11 /* MainViewControllerExtTableAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A928F3C592000DDE11 /* MainViewControllerExtTableAction.swift */; };
+		66A667AD28F3E24A000DDE11 /* SetAsstsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667AC28F3E24A000DDE11 /* SetAsstsViewController.swift */; };
+		66A667AF28F3E279000DDE11 /* SetOrebsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667AE28F3E279000DDE11 /* SetOrebsViewController.swift */; };
+		66A667B128F3E298000DDE11 /* SetDrebsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667B028F3E298000DDE11 /* SetDrebsViewController.swift */; };
+		66A667B328F3E2B8000DDE11 /* SetStealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667B228F3E2B8000DDE11 /* SetStealsViewController.swift */; };
+		66A667B528F3E2D7000DDE11 /* SetBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667B428F3E2D7000DDE11 /* SetBlocksViewController.swift */; };
+		66A667B728F3E2F3000DDE11 /* SetDefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667B628F3E2F3000DDE11 /* SetDefsViewController.swift */; };
+		66A667B928F3E31E000DDE11 /* SetChargesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667B828F3E31E000DDE11 /* SetChargesViewController.swift */; };
+		66A667BB28F3E33F000DDE11 /* SetTosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667BA28F3E33F000DDE11 /* SetTosViewController.swift */; };
 		66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */; };
 		66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */; };
 		66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1728EFD1C600920DA6 /* AppDelegate.swift */; };
@@ -61,6 +69,14 @@
 		66A667A528F3B9DA000DDE11 /* SetPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPlayersViewController.swift; sourceTree = "<group>"; };
 		66A667A728F3C226000DDE11 /* SetNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNumberViewController.swift; sourceTree = "<group>"; };
 		66A667A928F3C592000DDE11 /* MainViewControllerExtTableAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtTableAction.swift; sourceTree = "<group>"; };
+		66A667AC28F3E24A000DDE11 /* SetAsstsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAsstsViewController.swift; sourceTree = "<group>"; };
+		66A667AE28F3E279000DDE11 /* SetOrebsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetOrebsViewController.swift; sourceTree = "<group>"; };
+		66A667B028F3E298000DDE11 /* SetDrebsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDrebsViewController.swift; sourceTree = "<group>"; };
+		66A667B228F3E2B8000DDE11 /* SetStealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStealsViewController.swift; sourceTree = "<group>"; };
+		66A667B428F3E2D7000DDE11 /* SetBlocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBlocksViewController.swift; sourceTree = "<group>"; };
+		66A667B628F3E2F3000DDE11 /* SetDefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefsViewController.swift; sourceTree = "<group>"; };
+		66A667B828F3E31E000DDE11 /* SetChargesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetChargesViewController.swift; sourceTree = "<group>"; };
+		66A667BA28F3E33F000DDE11 /* SetTosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTosViewController.swift; sourceTree = "<group>"; };
 		66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtStatsTableUI.swift; sourceTree = "<group>"; };
 		66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstitutePlayersViewController.swift; sourceTree = "<group>"; };
 		66EACA1428EFD1C600920DA6 /* basketballStatsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketballStatsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +141,14 @@
 				66A667A928F3C592000DDE11 /* MainViewControllerExtTableAction.swift */,
 				66A667A528F3B9DA000DDE11 /* SetPlayersViewController.swift */,
 				66A667A728F3C226000DDE11 /* SetNumberViewController.swift */,
+				66A667AC28F3E24A000DDE11 /* SetAsstsViewController.swift */,
+				66A667AE28F3E279000DDE11 /* SetOrebsViewController.swift */,
+				66A667B028F3E298000DDE11 /* SetDrebsViewController.swift */,
+				66A667B228F3E2B8000DDE11 /* SetStealsViewController.swift */,
+				66A667B428F3E2D7000DDE11 /* SetBlocksViewController.swift */,
+				66A667B628F3E2F3000DDE11 /* SetDefsViewController.swift */,
+				66A667B828F3E31E000DDE11 /* SetChargesViewController.swift */,
+				66A667BA28F3E33F000DDE11 /* SetTosViewController.swift */,
 			);
 			path = tableAction;
 			sourceTree = "<group>";
@@ -344,16 +368,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				66EACA1C28EFD1C600920DA6 /* MainViewController.swift in Sources */,
+				66A667AD28F3E24A000DDE11 /* SetAsstsViewController.swift in Sources */,
+				66A667B528F3E2D7000DDE11 /* SetBlocksViewController.swift in Sources */,
+				66A667B728F3E2F3000DDE11 /* SetDefsViewController.swift in Sources */,
 				66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */,
 				66EACA4E28F008FF00920DA6 /* MainViewControllerExtTopUI.swift in Sources */,
+				66A667BB28F3E33F000DDE11 /* SetTosViewController.swift in Sources */,
 				6618A7DE28F2F967000097D3 /* SpeechToMe.swift in Sources */,
 				66A667A628F3B9DA000DDE11 /* SetPlayersViewController.swift in Sources */,
+				66A667B128F3E298000DDE11 /* SetDrebsViewController.swift in Sources */,
 				66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */,
 				66A667A428F3674F000DDE11 /* SetGameClockViewController.swift in Sources */,
 				6618A7DC28F2DFCF000097D3 /* SettingsBundleHelper.swift in Sources */,
+				66A667AF28F3E279000DDE11 /* SetOrebsViewController.swift in Sources */,
+				66A667B328F3E2B8000DDE11 /* SetStealsViewController.swift in Sources */,
 				66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */,
 				6618A7D628F243F7000097D3 /* VoiceTextTableViewController.swift in Sources */,
 				66A667A828F3C226000DDE11 /* SetNumberViewController.swift in Sources */,
+				66A667B928F3E31E000DDE11 /* SetChargesViewController.swift in Sources */,
 				66EACA1A28EFD1C600920DA6 /* SceneDelegate.swift in Sources */,
 				6618A7DA28F2D000000097D3 /* TrainSpeechRecognize.swift in Sources */,
 				66EACA2228EFD1C600920DA6 /* basketballStatsTracker.xcdatamodeld in Sources */,

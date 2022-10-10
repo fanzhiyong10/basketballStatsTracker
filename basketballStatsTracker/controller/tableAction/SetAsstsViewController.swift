@@ -1,5 +1,5 @@
 //
-//  SetNumberViewController.swift
+//  SetAsstsViewController.swift
 //  basketballStatsTracker
 //
 //  Created by 范志勇 on 2022/10/10.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class SetNumberViewController: UIViewController, UITextFieldDelegate {
+class SetAsstsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.overrideUserInterfaceStyle = .light
         self.view.backgroundColor = .systemGray6
         
-        self.title = "Set Number"
+        self.title = "Set Assts"
 
         // Do any additional setup after loading the view.
         self.createNavigatorBar()
@@ -30,55 +30,82 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    var numberTF: UITextField!
+    var asstsTF: UITextField!
     
-    /// Player
+    /// assts
     func createInterface() {
         let font = UIFont.systemFont(ofSize: 24)
         let fontTF = UIFont.systemFont(ofSize: 48, weight: .bold)
-        // label: Number
-        let numberLabel = UILabel()
-        numberLabel.text = "Number"
-        numberLabel.textAlignment = .center
-        numberLabel.font = font
-        numberLabel.textColor = .darkGray
+        // label: Assts
+        let asstsLabel = UILabel()
+        asstsLabel.text = "Assts"
+        asstsLabel.textAlignment = .center
+        asstsLabel.font = font
+        asstsLabel.textColor = .darkGray
         
-        self.view.addSubview(numberLabel)
+        self.view.addSubview(asstsLabel)
         
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        asstsLabel.translatesAutoresizingMaskIntoConstraints = false
         let safe = self.view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            numberLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
-            numberLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            numberLabel.widthAnchor.constraint(equalTo: safe.widthAnchor),
-            numberLabel.heightAnchor.constraint(equalToConstant: 40)
+            asstsLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
+            asstsLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            asstsLabel.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            asstsLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        // input number
-        let numberTF = UITextField()
-        numberTF.text = self.liveData?.number
-        numberTF.placeholder = "input number"
-        numberTF.textAlignment = .center
-        numberTF.font = fontTF
-        numberTF.textColor = .systemRed
-        numberTF.adjustsFontSizeToFitWidth = true
-        numberTF.minimumFontSize = 17
-        numberTF.keyboardType = .asciiCapableNumberPad
-        numberTF.delegate = self
+        // assts
+        let asstsTF = UITextField()
+        asstsTF.text = self.liveData?.assts
+        asstsTF.placeholder = "input assts"
+        asstsTF.textAlignment = .center
+        asstsTF.font = fontTF
+        asstsTF.textColor = .systemRed
+        asstsTF.adjustsFontSizeToFitWidth = true
+        asstsTF.minimumFontSize = 17
+        asstsTF.keyboardType = .asciiCapableNumberPad
+        asstsTF.delegate = self
         
-        self.numberTF = numberTF
-        self.view.addSubview(numberTF)
+        self.asstsTF = asstsTF
+        self.view.addSubview(asstsTF)
         
-        numberTF.translatesAutoresizingMaskIntoConstraints = false
+        asstsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            numberTF.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 12),
-            numberTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            numberTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
-            numberTF.heightAnchor.constraint(equalToConstant: 60)
+            asstsTF.topAnchor.constraint(equalTo: asstsLabel.bottomAnchor, constant: 12),
+            asstsTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            asstsTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            asstsTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         
+        // stepper
+        let aRect = CGRect(x: 650, y: 125, width: 150, height: 60)
+        let stepper = UIStepper(frame: aRect)
+        stepper.minimumValue = 0
+        stepper.maximumValue = 300
+        stepper.stepValue = 1
+        
+        
+        stepper.value = Double((self.liveData?.assts_count)!)
+        stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
+        
+        self.view.addSubview(stepper)
+        
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stepper.topAnchor.constraint(equalTo: asstsTF.bottomAnchor, constant: 12),
+            stepper.centerXAnchor.constraint(equalTo: asstsTF.centerXAnchor, constant: 30),
+            stepper.widthAnchor.constraint(equalToConstant: 150),
+            stepper.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    @objc func stepperChanged(_ sender: UIStepper) {
+        let value = sender.value
+        
+        self.asstsTF.text = String(Int(value))
     }
     
     func createNavigatorBar() {
@@ -113,13 +140,13 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
     /// Done
     ///
     /// action
-    /// - Number cannot be empty
+    /// 1. 验证选中的是5个，如果不是5个，则提示弹窗，继续选择
     @objc func doneSelected() {
-        guard let tmp_number = self.numberTF.text else {
+        guard let tmp = self.asstsTF.text, let tmp_assts = Int(tmp) else {
             return
         }
         
-        self.liveData?.number = tmp_number
+        self.liveData?.assts_count = tmp_assts
 
         guard self.validSelect() else {
             // alert error
@@ -133,7 +160,7 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
     }
 
     func validSelect() -> Bool {
-        if self.liveData?.number == "" {
+        if let assts_count = self.liveData?.assts_count, assts_count < 0 {
             return false
         }
         
@@ -143,7 +170,7 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
     /// alert selected error
     func alertSelectedError() {
         DispatchQueue.main.async {
-            let title = "Number cannot be empty"
+            let title = "Assts_count cannot be less than 0"
             let message = ""
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
@@ -157,27 +184,27 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
     
     var liveData: LiveData?
     var indexPath: IndexPath?
-    weak var delegate: SetNumberDelegate?
+    weak var delegate: SetAsstsDelegate?
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         if self.doneIsRight {
-            self.delegate?.doSetNumber(liveData!, indexPath!)
+            self.delegate?.doSetAssts(liveData!, indexPath!)
         }
     }
 
 }
 
 
-protocol SetNumberDelegate: AnyObject {
-    func doSetNumber(_ liveData: LiveData, _ indexPath: IndexPath)
+protocol SetAsstsDelegate: AnyObject {
+    func doSetAssts(_ liveData: LiveData, _ indexPath: IndexPath)
 }
 
-extension MainViewController: SetNumberDelegate {
-    func doSetNumber(_ liveData: LiveData, _ indexPath: IndexPath) {
+extension MainViewController: SetAsstsDelegate {
+    func doSetAssts(_ liveData: LiveData, _ indexPath: IndexPath) {
         DispatchQueue.main.async {
-            self.allLiveDatas[indexPath.row].number = liveData.number
+            self.allLiveDatas[indexPath.row].assts_count = liveData.assts_count
             
             // modify show
             self.tableView.reloadData()
