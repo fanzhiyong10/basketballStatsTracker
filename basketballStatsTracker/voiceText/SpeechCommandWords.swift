@@ -43,7 +43,7 @@ struct SpeechCommandWords {
     }
     
     static var toMake: [String] {
-        var strArr = ["make" , "Make"]
+        var strArr = ["make"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_0"
@@ -56,7 +56,7 @@ struct SpeechCommandWords {
     }
     
     static var toMiss: [String] {
-        var strArr = ["miss" , "Miss"]
+        var strArr = ["miss"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_1"
@@ -69,7 +69,7 @@ struct SpeechCommandWords {
     }
     
     static var toBucket: [String] {
-        var strArr = ["bucket" , "Bucket"]
+        var strArr = ["bucket"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_2"
@@ -82,7 +82,7 @@ struct SpeechCommandWords {
     }
     
     static var toBrick: [String] {
-        var strArr = ["brick" , "Brick"]
+        var strArr = ["brick"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_3"
@@ -95,7 +95,7 @@ struct SpeechCommandWords {
     }
     
     static var toSwish: [String] {
-        var strArr = ["swish" , "Swish"]
+        var strArr = ["swish"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_4"
@@ -108,7 +108,7 @@ struct SpeechCommandWords {
     }
     
     static var toOff: [String] {
-        var strArr = ["off" , "Off"]
+        var strArr = ["off"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_5"
@@ -121,7 +121,7 @@ struct SpeechCommandWords {
     }
     
     static var toBoard: [String] {
-        var strArr = ["board" , "Board"]
+        var strArr = ["board"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_6"
@@ -134,7 +134,7 @@ struct SpeechCommandWords {
     }
     
     static var toGlass: [String] {
-        var strArr = ["glass" , "Glass"]
+        var strArr = ["glass"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_7"
@@ -147,7 +147,7 @@ struct SpeechCommandWords {
     }
     
     static var toDime: [String] {
-        var strArr = ["dime" , "Dime"]
+        var strArr = ["dime"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_8"
@@ -160,7 +160,7 @@ struct SpeechCommandWords {
     }
     
     static var toBad: [String] {
-        var strArr = ["bad" , "Bad"]
+        var strArr = ["bad"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_9"
@@ -173,7 +173,7 @@ struct SpeechCommandWords {
     }
     
     static var toSteal: [String] {
-        var strArr = ["steal" , "Steal"]
+        var strArr = ["steal"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_10"
@@ -186,7 +186,7 @@ struct SpeechCommandWords {
     }
     
     static var toBlock: [String] {
-        var strArr = ["block" , "Block"]
+        var strArr = ["block"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_11"
@@ -199,7 +199,7 @@ struct SpeechCommandWords {
     }
     
     static var toTip: [String] {
-        var strArr = ["tip" , "Tip"]
+        var strArr = ["tip"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_12"
@@ -212,7 +212,7 @@ struct SpeechCommandWords {
     }
     
     static var toCharge: [String] {
-        var strArr = ["charge" , "Charge"]
+        var strArr = ["charge"]
         
         var speechComandWords = "speechComandWords"
         speechComandWords += "_13"

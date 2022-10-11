@@ -102,6 +102,8 @@ extension MainViewController {
             voiceListeningStart = true
             color = UIColor.systemGreen
             
+            self.voiceToTextLabel.text = ""
+            
             self.speechControl()
             
             SettingsBundleHelper.saveIsResponseOnSpeechControl(0)
@@ -293,7 +295,7 @@ extension MainViewController {
         
         var size = self.view.bounds.size
         size.height -= 20
-        size.width = 500
+        size.width = 600
         vc.preferredContentSize = size
         vc.view.frame = CGRect(origin: CGPoint(), size: size)
         

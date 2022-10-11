@@ -177,10 +177,10 @@ class VoiceTextTableViewController: UITableViewController {
         
         if cell.viewWithTag(200) == nil {
             let font = UIFont.systemFont(ofSize: 20)
-            var width: CGFloat = 210
+            let width: CGFloat = 200
 
             var aRect = CGRect(x: 20, y: 10, width: width, height: 30) //110
-            let gap: CGFloat = 100
+            let gap: CGFloat = 60
             
             let lab = UILabel(frame: aRect)
             lab.tag = 200
@@ -197,18 +197,39 @@ class VoiceTextTableViewController: UITableViewController {
             aRect.origin.x += lab.bounds.width + gap
             let button = ButtonInTable(frame: aRect)
             button.tag = 201
-            let s0 = "Training"
-            let s0_loc = NSLocalizedString(s0, tableName: "speechControl", value: s0, comment: s0)
-            let str_as = NSMutableAttributedString(string:s0_loc, attributes: [ .font:font, .foregroundColor: UIColor.red])
+            let str_as = NSMutableAttributedString(string:"Training", attributes: [ .font:font, .foregroundColor: UIColor.red])
             button.setAttributedTitle(str_as, for: .normal)
             button.backgroundColor = UIColor.red.withAlphaComponent(0.1)
             button.layer.cornerRadius = 5
             cell.contentView.addSubview(button)
+            
+            do {
+                aRect.size.width = 130 // 90
+                aRect.size.height = 36
+                aRect.origin.y = 7
+                aRect.origin.x += button.bounds.width + gap
+                let button = ButtonInTable(frame: aRect)
+                button.tag = 202
+                let str_as = NSMutableAttributedString(string:"Vocabulary", attributes: [ .font:font, .foregroundColor: UIColor.systemBlue])
+                button.setAttributedTitle(str_as, for: .normal)
+                button.backgroundColor = UIColor.systemYellow.withAlphaComponent(0.1)
+                button.layer.cornerRadius = 5
+                cell.contentView.addSubview(button)
+            }
+            
         }
         
-        let button = cell.contentView.viewWithTag(201) as! ButtonInTable
-        button.indexPath = indexPath
-        button.addTarget(self, action: #selector(toTrain), for: .touchUpInside)
+        do {
+            let button = cell.contentView.viewWithTag(201) as! ButtonInTable
+            button.indexPath = indexPath
+            button.addTarget(self, action: #selector(toTrain), for: .touchUpInside)
+        }
+        
+        do {
+            let button = cell.contentView.viewWithTag(202) as! ButtonInTable
+            button.indexPath = indexPath
+            button.addTarget(self, action: #selector(toVocabulary), for: .touchUpInside)
+        }
 
         let lab = cell.contentView.viewWithTag(200) as! UILabel
         
@@ -327,6 +348,80 @@ class VoiceTextTableViewController: UITableViewController {
         
         // close
         self.dismiss(animated:true)
+    }
+    
+    //toVocabulary
+    @objc func toVocabulary(_ sender: ButtonInTable) {
+        // 可以传递控制参量
+        print("toVocabulary")
+        guard let indexPath = sender.indexPath else { return }
+        
+        print("indexPath: \(indexPath)")
+        var speechComandWords = "speechComandWords"
+        var text = ""
+        
+        var title = "Vocabulary "
+        
+        switch indexPath.section {
+        case 0:
+            text = self.sectionVoiceCommands[indexPath.row]
+            title += " Command: \(text)"
+
+        case 1:
+            text = self.sectionNumbers[indexPath.row]
+            title += " Number: \(text)"
+
+        case 2:
+            text = self.sectionPlayers[indexPath.row]
+            title += " Player: \(text)"
+
+        default:
+            break
+        }
+        
+        speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
+        
+        let vc = MakeVocabularyViewController()
+        vc.speechComandWords = speechComandWords
+        vc.indexPath = indexPath
+        vc.view.frame = CGRect(x: 0,y: 0,width: 650, height: 650)
+        vc.preferredContentSize = CGSize(width: 650, height: 250)
+
+        let nav = UINavigationController(rootViewController: vc)
+        
+        
+        vc.navigationItem.title = title
+
+        
+        nav.modalPresentationStyle = .popover // 弹窗模式
+        nav.isModalInPopover = true // modal，点击窗口的外面，不会关闭窗口
+        
+        self.present(nav, animated: true) {
+            // if you want to prevent toolbar buttons from being active
+            // by setting passthroughViews to nil, you must do it after presentation is complete
+            // I find this annoying; why does the toolbar default to being active?
+            nav.popoverPresentationController?.passthroughViews = nil
+        }
+        
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = self.view
+            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
+        }
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .systemBlue
+            appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
+            nav.navigationBar.standardAppearance = appearance
+            nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
+        } else {
+            // Fallback on earlier versions
+            nav.navigationBar.barTintColor = .systemBlue // works in iOS 8
+            nav.navigationBar.tintColor = .white
+        }
+
     }
     
     //节：section

@@ -269,6 +269,8 @@ class VoiceTrainingViewController: UIViewController {
         self.wordText.font = UIFont.systemFont(ofSize: 20)
         self.contentView.addSubview(self.wordText)
         
+        self.wordText.isUserInteractionEnabled = false
+        
         self.wordText.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -300,6 +302,8 @@ class VoiceTrainingViewController: UIViewController {
         self.commandText.text = "Voice Command Set (History + Now)"
         self.commandText.font = UIFont.systemFont(ofSize: 20)
         self.contentView.addSubview(self.commandText)
+        
+        self.commandText.isUserInteractionEnabled = false
         
         self.commandText.translatesAutoresizingMaskIntoConstraints = false
         

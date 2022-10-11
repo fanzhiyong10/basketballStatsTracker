@@ -21,7 +21,8 @@ func containSpeechCommand(strInput: String, word: String) -> Bool {
         str.removeLast()
     }
     
-    if str.hasSuffix(word) {
+    // words are not case sensitive
+    if str.lowercased().hasSuffix(word.lowercased()) {
         return true
     }
     
@@ -29,6 +30,9 @@ func containSpeechCommand(strInput: String, word: String) -> Bool {
 }
 
 struct WordCommandAndNotification {
+    // Command
+    var command: String
+    
     // 话语
     var words: [String]
     
@@ -41,46 +45,46 @@ public class SpeechToMe: NSObject {
     var myWordCommandAndNotifications: [WordCommandAndNotification]? {
         var result = [WordCommandAndNotification]()
         
-        var command = WordCommandAndNotification(words: SpeechCommandWords.toMake, notification: .toMake)
+        var command = WordCommandAndNotification(command: "MAKE", words: SpeechCommandWords.toMake, notification: .toMake)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toMiss, notification: .toMiss)
+        command = WordCommandAndNotification(command: "MISS", words: SpeechCommandWords.toMiss, notification: .toMiss)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toBucket, notification: .toBucket)
+        command = WordCommandAndNotification(command: "BUCKET", words: SpeechCommandWords.toBucket, notification: .toBucket)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toBrick, notification: .toBrick)
+        command = WordCommandAndNotification(command: "BRICK", words: SpeechCommandWords.toBrick, notification: .toBrick)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toSwish, notification: .toSwish)
+        command = WordCommandAndNotification(command: "SWISH", words: SpeechCommandWords.toSwish, notification: .toSwish)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toOff, notification: .toOff)
+        command = WordCommandAndNotification(command: "OFF", words: SpeechCommandWords.toOff, notification: .toOff)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toBoard, notification: .toBoard)
+        command = WordCommandAndNotification(command: "BOARD", words: SpeechCommandWords.toBoard, notification: .toBoard)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toGlass, notification: .toGlass)
+        command = WordCommandAndNotification(command: "GLASS", words: SpeechCommandWords.toGlass, notification: .toGlass)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toDime, notification: .toDime)
+        command = WordCommandAndNotification(command: "DIME", words: SpeechCommandWords.toDime, notification: .toDime)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toBad, notification: .toBad)
+        command = WordCommandAndNotification(command: "BAD", words: SpeechCommandWords.toBad, notification: .toBad)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toSteal, notification: .toSteal)
+        command = WordCommandAndNotification(command: "STEAL", words: SpeechCommandWords.toSteal, notification: .toSteal)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toBlock, notification: .toBlock)
+        command = WordCommandAndNotification(command: "BLOCK", words: SpeechCommandWords.toBlock, notification: .toBlock)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toTip, notification: .toTip)
+        command = WordCommandAndNotification(command: "TIP", words: SpeechCommandWords.toTip, notification: .toTip)
         result.append(command)
         
-        command = WordCommandAndNotification(words: SpeechCommandWords.toCharge, notification: .toCharge)
+        command = WordCommandAndNotification(command: "CHARGE", words: SpeechCommandWords.toCharge, notification: .toCharge)
         result.append(command)
         
         return result
@@ -216,6 +220,8 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                     // 遍历：查找声控命令：应用级
                     for myWordCommandAndNotification in self.myWordCommandAndNotifications! {
                         for word in myWordCommandAndNotification.words {
+                            print("myWordCommandAndNotification.words")
+                            print(word)
                             if containSpeechCommand(strInput: str, word: word) {
                                 // 发出通知
                                 if isFinal == false {
@@ -227,20 +233,20 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                                                 let info = "lastTime.timeIntervalSinceNow < -2.0: " + word
                                                 print(info)
                                                 // process
-                                                if self.saveVoiceCommand(str: str, word: word) {
+                                                if self.saveVoiceCommand(str: str, command: myWordCommandAndNotification.command) {
                                                     NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
                                                 }
                                             }
                                         }
                                     } else {
-                                        lastWord = word
+                                        lastWord = word.lowercased()
                                         lastTime = Date()
                                         if SettingsBundleHelper.fetchIsResponseOnSpeechControl() == 0 {
                                             let info = "lastWord = word: " + word
                                             print(info)
                                             
                                             // process
-                                            if self.saveVoiceCommand(str: str, word: word) {
+                                            if self.saveVoiceCommand(str: str, command: myWordCommandAndNotification.command) {
                                                 NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
                                             }
                                             
@@ -300,7 +306,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
     
     /// (number, command)
     /// (player, command)
-    func saveVoiceCommand(str: String, word: String) -> Bool {
+    func saveVoiceCommand(str: String, command: String) -> Bool {
         // number, word
         let arr = str.split(separator: " ")
         if arr.count < 2 {
@@ -315,8 +321,8 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
             print(str_tmp)
             
             if let aInt = Int(str_tmp) {
-                print("number: \(aInt),\(word)")
-                let voiceCommand = "\(aInt) \(word)"
+                print("number: \(aInt),\(command)")
+                let voiceCommand = "\(aInt) \(command.uppercased())"
                 SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
                 return true
             }
