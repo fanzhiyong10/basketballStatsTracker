@@ -233,7 +233,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                                                 let info = "lastTime.timeIntervalSinceNow < -2.0: " + word
                                                 print(info)
                                                 // process
-                                                if self.saveVoiceCommand(str: str, command: myWordCommandAndNotification.command) {
+                                                if self.saveVoiceCommand(str: str, wcn: myWordCommandAndNotification) {
                                                     NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
                                                 }
                                             }
@@ -246,7 +246,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                                             print(info)
                                             
                                             // process
-                                            if self.saveVoiceCommand(str: str, command: myWordCommandAndNotification.command) {
+                                            if self.saveVoiceCommand(str: str, wcn: myWordCommandAndNotification) {
                                                 NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
                                             }
                                             
@@ -306,7 +306,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
     
     /// (number, command)
     /// (player, command)
-    func saveVoiceCommand(str: String, command: String) -> Bool {
+    func saveVoiceCommand(str: String, wcn: WordCommandAndNotification) -> Bool {
         // number, word
         let arr = str.split(separator: " ")
         if arr.count < 2 {
@@ -321,8 +321,8 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
             print(str_tmp)
             
             if let aInt = Int(str_tmp) {
-                print("number: \(aInt),\(command)")
-                let voiceCommand = "\(aInt) \(command.uppercased())"
+                print("number: \(aInt),\(wcn.command)")
+                let voiceCommand = "\(aInt) \(wcn.command.uppercased())"
                 SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
                 return true
             }
