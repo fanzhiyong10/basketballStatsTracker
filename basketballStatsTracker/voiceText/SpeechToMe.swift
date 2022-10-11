@@ -29,6 +29,50 @@ func containSpeechCommand(strInput: String, word: String) -> Bool {
     return false
 }
 
+struct PlayerVoiceWords {
+    // Player
+    var player: String
+    
+    // voice words
+    var words: [String]
+    
+    // stored locally
+    var speechComandWords: String
+    
+    // used for recognize
+    // First word is player
+    var wordsForRecognize: [String] {
+        var result = [String]()
+        result.append(player.lowercased())
+        
+        result += words
+        
+        return result
+    }
+}
+
+struct NumberVoiceWords {
+    // Number
+    var number: String
+    
+    // voice words
+    var words: [String]
+    
+    // stored locally
+    var speechComandWords: String
+    
+    // used for recognize
+    // First word is number
+    var wordsForRecognize: [String] {
+        var result = [String]()
+        result.append(number)
+        
+        result += words
+        
+        return result
+    }
+}
+
 struct WordCommandAndNotification {
     // Command
     var command: String
@@ -41,6 +85,8 @@ struct WordCommandAndNotification {
 }
 
 public class SpeechToMe: NSObject {
+    var playerVoiceWords: [PlayerVoiceWords]?
+    
     // 话语-通知，入参：使用者传入
     var myWordCommandAndNotifications: [WordCommandAndNotification]? {
         var result = [WordCommandAndNotification]()
@@ -96,6 +142,8 @@ public class SpeechToMe: NSObject {
     func isSceneRight() -> Bool {
         return true
     }
+    
+    var delegate: IsPlayerORCommandMeDelegate?
 }
 
 public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
@@ -207,7 +255,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                 //=========
                 let str = result.bestTranscription.formattedString
 
-                let info = "语音识别，文字：\(str)"
+                let info = "Originally recognized speech text: \(str)"
                 print(info)
                 
                 if self.isSceneRight() == false {
@@ -304,6 +352,9 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
         self.recognitionTask = nil
     }
     
+    // up to 5 words
+    let upToNumber = 2
+    
     /// (number, command)
     /// (player, command)
     func saveVoiceCommand(str: String, wcn: WordCommandAndNotification) -> Bool {
@@ -314,19 +365,129 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
         }
         
         let count = arr.count
-        for index in 0..<count {
+        var counter = 0
+        for index in 1..<count {
             let tmp = arr[count - 1 - index]
-            let str_tmp = String(tmp)
+            let str_tmp = String(tmp).lowercased()
             
             print(str_tmp)
-            
+            /*
             if let aInt = Int(str_tmp) {
+                // number
                 print("number: \(aInt),\(wcn.command)")
                 let voiceCommand = "\(aInt) \(wcn.command.uppercased())"
                 SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
                 return true
+            } else {
+                // player
+                if let player = self.delegate!.isPlayer(str_tmp) {
+                    // player
+                    print("player: \(str_tmp),\(wcn.command)")
+                    let voiceCommand = "\(player.capitalized) \(wcn.command.uppercased())"
+                    SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
+                    return true
+                }
+            }
+            */
+            
+            
+            if let aInt = self.delegate!.isNumber(str_tmp) {
+                // number
+                print("number: \(aInt),\(wcn.command)")
+                let voiceCommand = "\(aInt) \(wcn.command.uppercased())"
+                SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
+                return true
+            } else {
+                // player
+                if let player = self.delegate!.isPlayer(str_tmp) {
+                    // player
+                    print("player: \(str_tmp),\(wcn.command)")
+                    let voiceCommand = "\(player.capitalized) \(wcn.command.uppercased())"
+                    SettingsBundleHelper.saveRecognizeVoiceCommand(voiceCommand)
+                    return true
+                }
+            }
+            
+            // If it's a number, but not a player's number, then exit
+            if Int(str_tmp) != nil {
+                break
+            }
+
+            
+            counter += 1
+            
+            if counter >= upToNumber {
+                break
             }
         }
+        
+        return false
+    }
+    
+    func isPlayer(_ word: String) -> String? {
+        guard self.playerVoiceWords != nil else {
+            return nil
+        }
+        print("isPlayer(_ word: String)  \(word)")
+        for pvw in self.playerVoiceWords! {
+            print(pvw.player)
+            if pvw.player.lowercased() == word {
+                return pvw.player
+            }
+            
+            for tmp in pvw.words {
+                print(tmp)
+                if tmp == word {
+                    return pvw.player
+                }
+            }
+        }
+        return nil
+    }
+}
+
+protocol IsPlayerORCommandMeDelegate: AnyObject {
+    func isPlayer(_ word: String) -> String?
+    func isNumber(_ word: String) -> String?
+    func isCommand(_ word: String) -> Bool
+}
+
+extension MainViewController: IsPlayerORCommandMeDelegate {
+    func isPlayer(_ word: String) -> String? {
+        guard self.playerVoiceWords != nil else {
+            return nil
+        }
+        
+        for pvw in self.playerVoiceWords! {
+            if pvw.player.lowercased() == word {
+                return pvw.player
+            }
+            
+            if pvw.words.contains(word) {
+                return pvw.player
+            }
+        }
+        return nil
+    }
+    
+    func isNumber(_ word: String) -> String? {
+        guard self.numberVoiceWords != nil else {
+            return nil
+        }
+        
+        for nvw in self.numberVoiceWords! {
+            if nvw.number == word {
+                return nvw.number
+            }
+            
+            if nvw.words.contains(word) {
+                return nvw.number
+            }
+        }
+        return nil
+    }
+    
+    func isCommand(_ word: String) -> Bool {
         
         return false
     }

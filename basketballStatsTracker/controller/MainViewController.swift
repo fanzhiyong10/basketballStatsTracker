@@ -163,9 +163,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.delegate = self
 
         self.addSpeechCommand()
-        
+        self.addObserverOfVoiceWordTrain()
+
         // 1: not speech recognize
         SettingsBundleHelper.saveIsResponseOnSpeechControl(1)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // time to load
+        self.processPlayerVoiceWords()
+        
+        self.processNumberVoiceWords()
     }
     
     var speechCommand: SpeechToMe?
@@ -224,6 +234,81 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.allLiveDatas = LiveData.createData()
         
         self.processTotalData()
+    }
+    
+    var playerVoiceWords: [PlayerVoiceWords]?
+    var numberVoiceWords: [NumberVoiceWords]?
+
+    /// only one time
+    func processPlayerVoiceWords() {
+        self.playerVoiceWords = [PlayerVoiceWords]()
+        
+        for liveData in self.allLiveDatas {
+            if liveData.player == nil {
+                continue
+            }
+            
+            let player = liveData.player!
+            let speechComandWords = "playerVoiceWords_\(player)"
+            var words = [String]()
+            words.append(player.lowercased())
+            
+            if let result = UserDefaults.standard.string(forKey: speechComandWords) {
+                // 命令集合处理
+                let strs = result.split(separator: ",")
+                
+                var wordSet = Set<String>()
+                for str in strs {
+                    wordSet.insert(String(str).lowercased())
+                }
+                
+                for word in wordSet {
+                    words.append(word)
+                }
+            } else {
+                UserDefaults.standard.set(player.lowercased(), forKey: speechComandWords)
+            }
+            
+            let pvw = PlayerVoiceWords(player: player, words: words, speechComandWords: speechComandWords)
+            
+            self.playerVoiceWords?.append(pvw)
+        }
+    }
+    
+    /// only one time
+    func processNumberVoiceWords() {
+        self.numberVoiceWords = [NumberVoiceWords]()
+        
+        for liveData in self.allLiveDatas {
+            if liveData.number == nil {
+                continue
+            }
+            
+            let number = liveData.number!
+            let speechComandWords = "numberVoiceWords_\(number)"
+            var words = [String]()
+            words.append(number)
+            
+            if let result = UserDefaults.standard.string(forKey: speechComandWords) {
+                // 命令集合处理
+                let strs = result.split(separator: ",")
+                
+                var wordSet = Set<String>()
+                for str in strs {
+                    wordSet.insert(String(str).lowercased())
+                }
+                
+                for word in wordSet {
+                    words.append(word)
+                }
+            } else {
+                UserDefaults.standard.set(number, forKey: speechComandWords)
+            }
+            
+            let nvw = NumberVoiceWords(number: number, words: words, speechComandWords: speechComandWords)
+            
+            self.numberVoiceWords?.append(nvw)
+        }
     }
     
     func processTotalData() {

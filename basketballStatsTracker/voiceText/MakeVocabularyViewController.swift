@@ -7,6 +7,15 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let toUpdateNumberVoiceWords = Notification.Name("toUpdateNumberVoiceWords")
+    static let toUpdatePlayerVoiceWords = Notification.Name("toUpdatePlayerVoiceWords")
+}
+
+let commandHeader = "speechComandWords_"
+let numberHeader = "numberVoiceWords_"
+let playerHeader = "playerVoiceWords_"
+
 class MakeVocabularyViewController: UIViewController, UITextViewDelegate {
     
     var indexPath: IndexPath?
@@ -169,6 +178,14 @@ class MakeVocabularyViewController: UIViewController, UITextViewDelegate {
         // 存储到本地
         UserDefaults.standard.set(words, forKey: self.speechComandWords!)
         
+        // Notification
+        if speechComandWords!.hasPrefix(numberHeader) {
+            NotificationCenter.default.post(name: .toUpdateNumberVoiceWords, object: self)
+        } else if speechComandWords!.hasPrefix(playerHeader) {
+            NotificationCenter.default.post(name: .toUpdatePlayerVoiceWords, object: self)
+        }
+        
+        
 /*
         guard self.validSelect() else {
             // alert error
@@ -205,15 +222,5 @@ class MakeVocabularyViewController: UIViewController, UITextViewDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

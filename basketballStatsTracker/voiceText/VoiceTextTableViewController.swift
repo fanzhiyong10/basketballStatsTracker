@@ -276,20 +276,24 @@ class VoiceTextTableViewController: UITableViewController {
         case 0:
             text = self.sectionVoiceCommands[indexPath.row]
             title += " Command: \(text)"
+            
+            speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
 
         case 1:
             text = self.sectionNumbers[indexPath.row]
             title += " Number: \(text)"
 
+            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
+            
         case 2:
             text = self.sectionPlayers[indexPath.row]
             title += " Player: \(text)"
+            
+            speechComandWords = "playerVoiceWords_" + self.sectionPlayers[indexPath.row]
 
         default:
             break
         }
-        
-        speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
         
         self.trainSpeechOfViewController = VoiceTrainingViewController()
         self.trainSpeechOfViewController?.speechComandWords = speechComandWords // 需要紧挨着初始化，否则会有问题
@@ -366,20 +370,24 @@ class VoiceTextTableViewController: UITableViewController {
         case 0:
             text = self.sectionVoiceCommands[indexPath.row]
             title += " Command: \(text)"
+            
+            speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
 
         case 1:
             text = self.sectionNumbers[indexPath.row]
             title += " Number: \(text)"
 
+            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
+            
         case 2:
             text = self.sectionPlayers[indexPath.row]
             title += " Player: \(text)"
+            
+            speechComandWords = "playerVoiceWords_" + self.sectionPlayers[indexPath.row]
 
         default:
             break
         }
-        
-        speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
         
         let vc = MakeVocabularyViewController()
         vc.speechComandWords = speechComandWords

@@ -73,8 +73,15 @@ class VoiceTrainingViewController: UIViewController {
             }
             self.commandText.text = str
             
-            // 存储到本地
+            // store locally
             UserDefaults.standard.set(str, forKey: self.speechComandWords!)
+            
+            // Notification
+            if speechComandWords!.hasPrefix(numberHeader) {
+                NotificationCenter.default.post(name: .toUpdateNumberVoiceWords, object: self)
+            } else if speechComandWords!.hasPrefix(playerHeader) {
+                NotificationCenter.default.post(name: .toUpdatePlayerVoiceWords, object: self)
+            }
         }
     }
     
