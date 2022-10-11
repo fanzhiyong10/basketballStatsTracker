@@ -70,6 +70,8 @@ class SetAsstsViewController: UIViewController, UITextFieldDelegate {
         self.asstsTF = asstsTF
         self.view.addSubview(asstsTF)
         
+        asstsTF.isUserInteractionEnabled = false
+        
         asstsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

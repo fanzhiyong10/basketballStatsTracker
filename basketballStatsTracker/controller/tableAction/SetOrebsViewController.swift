@@ -70,6 +70,8 @@ class SetOrebsViewController: UIViewController, UITextFieldDelegate {
         self.orebsTF = orebsTF
         self.view.addSubview(orebsTF)
         
+        orebsTF.isUserInteractionEnabled = false
+        
         orebsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

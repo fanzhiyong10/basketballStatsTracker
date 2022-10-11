@@ -70,6 +70,8 @@ class SetBlocksViewController: UIViewController, UITextFieldDelegate {
         self.blocksTF = blocksTF
         self.view.addSubview(blocksTF)
         
+        blocksTF.isUserInteractionEnabled = false
+        
         blocksTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

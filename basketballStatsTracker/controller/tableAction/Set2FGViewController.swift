@@ -89,6 +89,8 @@ class Set2FGViewController: UIViewController, UITextFieldDelegate {
         self.fg2MakeTF = fg2MakeTF
         self.view.addSubview(fg2MakeTF)
         
+        fg2MakeTF.isUserInteractionEnabled = false
+        
         fg2MakeTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -112,6 +114,8 @@ class Set2FGViewController: UIViewController, UITextFieldDelegate {
         
         self.fg2MissTF = fg2MissTF
         self.view.addSubview(fg2MissTF)
+        
+        fg2MissTF.translatesAutoresizingMaskIntoConstraints = false
         
         fg2MissTF.translatesAutoresizingMaskIntoConstraints = false
         

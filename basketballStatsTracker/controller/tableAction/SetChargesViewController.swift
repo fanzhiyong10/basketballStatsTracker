@@ -70,6 +70,8 @@ class SetChargesViewController: UIViewController, UITextFieldDelegate {
         self.chargesTF = chargesTF
         self.view.addSubview(chargesTF)
         
+        chargesTF.isUserInteractionEnabled = false
+        
         chargesTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

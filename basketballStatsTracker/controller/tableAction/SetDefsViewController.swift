@@ -70,6 +70,8 @@ class SetDefsViewController: UIViewController, UITextFieldDelegate {
         self.defsTF = defsTF
         self.view.addSubview(defsTF)
         
+        defsTF.isUserInteractionEnabled = false
+        
         defsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

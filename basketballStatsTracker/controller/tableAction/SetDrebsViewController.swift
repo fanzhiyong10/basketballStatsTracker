@@ -70,6 +70,8 @@ class SetDrebsViewController: UIViewController, UITextFieldDelegate {
         self.drebsTF = drebsTF
         self.view.addSubview(drebsTF)
         
+        drebsTF.isUserInteractionEnabled = false
+        
         drebsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

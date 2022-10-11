@@ -70,6 +70,8 @@ class SetStealsViewController: UIViewController, UITextFieldDelegate {
         self.stealsTF = stealsTF
         self.view.addSubview(stealsTF)
         
+        stealsTF.isUserInteractionEnabled = false
+        
         stealsTF.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
