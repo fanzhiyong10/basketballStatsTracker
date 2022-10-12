@@ -8,6 +8,7 @@
 import Foundation
 
 extension Notification.Name {
+    static let commandSuccess = Notification.Name("commandSuccess")
     static let toMake = Notification.Name("toMake")
     static let toMiss = Notification.Name("toMiss")
     static let toBucket = Notification.Name("toBucket")

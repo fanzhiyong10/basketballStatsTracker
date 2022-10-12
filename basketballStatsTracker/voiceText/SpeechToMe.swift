@@ -283,6 +283,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                                                 // process
                                                 if self.saveVoiceCommand(str: str, wcn: myWordCommandAndNotification) {
                                                     NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                                    NotificationCenter.default.post(name: .commandSuccess, object: self)
                                                 }
                                             }
                                         }
@@ -296,6 +297,7 @@ public class SpeechToMe13: SpeechToMe, SFSpeechRecognizerDelegate {
                                             // process
                                             if self.saveVoiceCommand(str: str, wcn: myWordCommandAndNotification) {
                                                 NotificationCenter.default.post(name: myWordCommandAndNotification.notification, object: self)
+                                                NotificationCenter.default.post(name: .commandSuccess, object: self)
                                             }
                                             
                                         }

@@ -126,6 +126,22 @@ extension MainViewController {
         self.micImageView.image = image
     }
     
+    func startVoiceListening() {
+        DispatchQueue.main.async {
+            self.voiceListeningStart = true
+            let color = UIColor.systemGreen
+            
+//            self.voiceToTextLabel.text = ""
+            
+            self.speechControl()
+            
+            SettingsBundleHelper.saveIsResponseOnSpeechControl(0)
+            
+            let image = UIImage(systemName: "mic.circle.fill", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 64)))?.withTintColor(color, renderingMode: .alwaysOriginal)
+            self.micImageView.image = image
+        }
+    }
+    
     func calGameClock() -> String {
         let hours = Int(self.game_cum_duration / 3600)
         let minutes = Int((self.game_cum_duration - Float(hours) * 3600) / 60)

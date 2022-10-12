@@ -13,6 +13,7 @@
 		6618A7DC28F2DFCF000097D3 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618A7DB28F2DFCF000097D3 /* SettingsBundleHelper.swift */; };
 		6618A7DE28F2F967000097D3 /* SpeechToMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618A7DD28F2F967000097D3 /* SpeechToMe.swift */; };
 		6618A7E028F2FCF7000097D3 /* SpeechCommandWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618A7DF28F2FCF7000097D3 /* SpeechCommandWords.swift */; };
+		664E7B0728F7004E00128C65 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 664E7B0628F7004E00128C65 /* ding.wav */; };
 		66A667A428F3674F000DDE11 /* SetGameClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A328F3674F000DDE11 /* SetGameClockViewController.swift */; };
 		66A667A628F3B9DA000DDE11 /* SetPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A528F3B9DA000DDE11 /* SetPlayersViewController.swift */; };
 		66A667A828F3C226000DDE11 /* SetNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667A728F3C226000DDE11 /* SetNumberViewController.swift */; };
@@ -71,6 +72,7 @@
 		6618A7DB28F2DFCF000097D3 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		6618A7DD28F2F967000097D3 /* SpeechToMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToMe.swift; sourceTree = "<group>"; };
 		6618A7DF28F2FCF7000097D3 /* SpeechCommandWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCommandWords.swift; sourceTree = "<group>"; };
+		664E7B0628F7004E00128C65 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 		66A667A328F3674F000DDE11 /* SetGameClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameClockViewController.swift; sourceTree = "<group>"; };
 		66A667A528F3B9DA000DDE11 /* SetPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPlayersViewController.swift; sourceTree = "<group>"; };
 		66A667A728F3C226000DDE11 /* SetNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNumberViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,14 @@
 			path = voiceText;
 			sourceTree = "<group>";
 		};
+		664E7B0528F7002700128C65 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				664E7B0628F7004E00128C65 /* ding.wav */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
 		66A667AB28F3C6B7000DDE11 /* tableAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +202,7 @@
 		66EACA1628EFD1C600920DA6 /* basketballStatsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				664E7B0528F7002700128C65 /* res */,
 				6618A7D428F24378000097D3 /* voiceText */,
 				66EACA4C28EFDC2400920DA6 /* support */,
 				66EACA4B28EFD30100920DA6 /* controller */,
@@ -360,6 +371,7 @@
 			files = (
 				66EACA2728EFD1C800920DA6 /* LaunchScreen.storyboard in Resources */,
 				66EACA2428EFD1C800920DA6 /* Assets.xcassets in Resources */,
+				664E7B0728F7004E00128C65 /* ding.wav in Resources */,
 				66EACA1F28EFD1C600920DA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

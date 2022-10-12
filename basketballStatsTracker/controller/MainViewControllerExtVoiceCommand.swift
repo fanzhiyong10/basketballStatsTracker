@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Speech
 
 /// Voice Command
 extension MainViewController {
@@ -60,6 +61,7 @@ extension MainViewController {
     
     /// Speech Command Observer
     func addSpeechCommand() {
+        NotificationCenter.default.addObserver(self, selector: #selector(commandSuccess), name: .commandSuccess, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toMake), name: .toMake, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toMiss), name: .toMiss, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toBucket), name: .toBucket, object: nil)
@@ -74,6 +76,56 @@ extension MainViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(toBlock), name: .toBlock, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toTip), name: .toTip, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toCharge), name: .toCharge, object: nil)
+    }
+    
+    /// 成功识别命令
+    @objc func commandSuccess() {
+        // 停止声控，配置参数不同
+        self.stopVoiceListening()
+        
+        // 播放，播放完后，启动侦听
+        playSound()
+    }
+    
+    func playSound() {
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(AVAudioSession.Category.playback)
+
+        if let URL = Bundle.main.url(forResource: "ding", withExtension: "wav") {
+            print("ding.wav")
+            let audioEngine = AVAudioEngine()
+            let playerNode = AVAudioPlayerNode()
+            
+            // Attach the player node to the audio engine.
+            audioEngine.attach(playerNode)
+            
+            // Connect the player node to the output node.
+            if let file = try? AVAudioFile(forReading: URL) {
+                print("file ding.wav")
+                audioEngine.connect(playerNode,
+                                    to: audioEngine.outputNode,
+                                    format: file.processingFormat)
+                print("file ding.wav file.fileFormat")
+                //        Then schedule the audio file for full playback. The callback notifies your app when playback completes.
+                playerNode.scheduleFile(file, at: nil,
+                                        completionCallbackType: .dataPlayedBack) { _ in
+                    print("file ding.wav end")
+                    audioEngine.stop()
+                    
+                    // 启动声控
+                    self.startVoiceListening()
+                }
+                
+                // Before you play the audio, start the engine.
+                do {
+                    try audioEngine.start()
+                    playerNode.play()
+                } catch {
+                    /* Handle the error. */
+                }
+            }
+        }
     }
     
     @objc func toMake() {

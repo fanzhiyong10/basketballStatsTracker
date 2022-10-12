@@ -234,14 +234,14 @@ extension ClockPickViewController : UIPickerViewDelegate, UIPickerViewDataSource
         
         switch component {
         case 0:
-            print(self.values_hour[row])
+//            print(self.values_hour[row])
             self.hours = Int(self.values_hour[row])!
         case 1:
-            print(self.values_minute[row])
+//            print(self.values_minute[row])
             self.minutes = Int(self.values_minute[row])!
 
         case 2:
-            print(self.values_second[row])
+//            print(self.values_second[row])
             self.seconds = Int(self.values_second[row])!
 
         default:
@@ -260,11 +260,11 @@ extension ClockPickViewController : UIPickerViewDelegate, UIPickerViewDataSource
             lab.text = self.values_hour[row]
             
         case 1:
-            print(self.values_minute[row])
+//            print(self.values_minute[row])
             lab.text = self.values_minute[row]
             
         case 2:
-            print(self.values_second[row])
+//            print(self.values_second[row])
             lab.text = self.values_second[row]
             
         default:
