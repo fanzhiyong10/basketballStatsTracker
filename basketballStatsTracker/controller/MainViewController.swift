@@ -416,6 +416,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+        // order: First is on the cout.
+        var arr_onCourt = [LiveData]()
+        var arr_notOnCourt = [LiveData]()
+        for livedata in self.allLiveDatas {
+            if livedata.isOnCourt {
+                arr_onCourt.append(livedata)
+            } else {
+                arr_notOnCourt.append(livedata)
+            }
+        }
+        
+        self.allLiveDatas = arr_onCourt + arr_notOnCourt
+        
         tableView.reloadData()
     }
 }

@@ -441,12 +441,13 @@ extension MainViewController {
             let tap = UITapGestureRecognizer(target: self, action: #selector(tapPlayer))
             lab.addGestureRecognizer(tap)
             
+            lab.frame.size.width += 40
             if liveData.isOnCourt {
                 lab.textColor = .systemGreen
                 let font = UIFont.systemFont(ofSize: 18, weight: .bold)
                 lab.font = font
                 lab.frame.origin.x = 2
-                lab.sizeToFit()
+//                lab.sizeToFit()
             } else {
                 lab.textColor = .black
                 lab.font = font
