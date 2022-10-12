@@ -375,12 +375,13 @@ extension MainViewController {
     }
     
     @objc func tapGamClock() {
-        let vc = SetGameClockViewController()
+//        let vc = SetGameClockViewController()
+        let vc = ClockPickViewController()
         vc.game_cum_duration = self.game_cum_duration
         vc.delegate = self
         
         var size = self.view.bounds.size
-        size.height = 200
+        size.height = 400 //200
         size.width = 500
         vc.preferredContentSize = size
         vc.view.frame = CGRect(origin: CGPoint(), size: size)

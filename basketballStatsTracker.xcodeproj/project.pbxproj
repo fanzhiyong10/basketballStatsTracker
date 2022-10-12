@@ -30,6 +30,7 @@
 		66A667C128F4072B000DDE11 /* Set3FGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667C028F4072B000DDE11 /* Set3FGViewController.swift */; };
 		66A667C328F44A24000DDE11 /* MainViewControllerExtVoiceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A667C228F44A24000DDE11 /* MainViewControllerExtVoiceCommand.swift */; };
 		66BFCD5728F4FD18004854F3 /* MakeVocabularyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BFCD5628F4FD18004854F3 /* MakeVocabularyViewController.swift */; };
+		66D3958B28F6AEE5003C7823 /* ClockPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3958A28F6AEE5003C7823 /* ClockPickViewController.swift */; };
 		66E40A4E28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */; };
 		66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */; };
 		66EACA1828EFD1C600920DA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EACA1728EFD1C600920DA6 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 		66A667C028F4072B000DDE11 /* Set3FGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set3FGViewController.swift; sourceTree = "<group>"; };
 		66A667C228F44A24000DDE11 /* MainViewControllerExtVoiceCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtVoiceCommand.swift; sourceTree = "<group>"; };
 		66BFCD5628F4FD18004854F3 /* MakeVocabularyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeVocabularyViewController.swift; sourceTree = "<group>"; };
+		66D3958A28F6AEE5003C7823 /* ClockPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockPickViewController.swift; sourceTree = "<group>"; };
 		66E40A4D28F1428F0039EBC8 /* MainViewControllerExtStatsTableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtStatsTableUI.swift; sourceTree = "<group>"; };
 		66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstitutePlayersViewController.swift; sourceTree = "<group>"; };
 		66EACA1428EFD1C600920DA6 /* basketballStatsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketballStatsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +236,7 @@
 				66A667C228F44A24000DDE11 /* MainViewControllerExtVoiceCommand.swift */,
 				66E40A4F28F14F4C0039EBC8 /* SubstitutePlayersViewController.swift */,
 				66A667A328F3674F000DDE11 /* SetGameClockViewController.swift */,
+				66D3958A28F6AEE5003C7823 /* ClockPickViewController.swift */,
 				66A667AB28F3C6B7000DDE11 /* tableAction */,
 			);
 			path = controller;
@@ -392,6 +395,7 @@
 				6618A7DE28F2F967000097D3 /* SpeechToMe.swift in Sources */,
 				66A667A628F3B9DA000DDE11 /* SetPlayersViewController.swift in Sources */,
 				66A667B128F3E298000DDE11 /* SetDrebsViewController.swift in Sources */,
+				66D3958B28F6AEE5003C7823 /* ClockPickViewController.swift in Sources */,
 				66E40A5028F14F4C0039EBC8 /* SubstitutePlayersViewController.swift in Sources */,
 				66A667A428F3674F000DDE11 /* SetGameClockViewController.swift in Sources */,
 				66A667C328F44A24000DDE11 /* MainViewControllerExtVoiceCommand.swift in Sources */,

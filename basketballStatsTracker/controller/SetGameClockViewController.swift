@@ -45,9 +45,48 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    var hoursTF: UITextField!
-    var minutesTF: UITextField!
-    var secondsTF: UITextField!
+    @objc func toSetHours() {
+        let vc = ClockPickViewController()
+        
+        var size = self.view.bounds.size
+        size.height = 400
+        size.width = 500
+        vc.preferredContentSize = size
+        vc.view.frame = CGRect(origin: CGPoint(), size: size)
+        
+        vc.isModalInPresentation = true
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+        nav.modalPresentationStyle = .popover
+        
+        self.present(nav, animated: true) {
+            // if you want to prevent toolbar buttons from being active
+            // by setting passthroughViews to nil, you must do it after presentation is complete
+            // I find this annoying; why does the toolbar default to being active?
+            nav.popoverPresentationController?.passthroughViews = nil
+        }
+        
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = self.minutesTF
+//            pop.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+//            pop.permittedArrowDirections = UIPopoverArrowDirection() // 去掉箭头
+            
+            pop.delegate = self
+            
+        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemBlue
+        appearance.titleTextAttributes = [.foregroundColor:UIColor.black]
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
+    }
+    
+    var hoursTF: UILabel!
+    var minutesTF: UILabel!
+    var secondsTF: UILabel!
     /// Game Clock
     func createInterface() {
         let font = UIFont.systemFont(ofSize: 24)
@@ -110,16 +149,12 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         ])
         
         // The range of minutes is
-        let hoursTF = UITextField()
+        let hoursTF = UILabel()
         hoursTF.text = "\(hours)"
-        hoursTF.placeholder = "value is 0~10"
         hoursTF.textAlignment = .center
         hoursTF.font = fontTF
         hoursTF.textColor = .systemRed
         hoursTF.adjustsFontSizeToFitWidth = true
-        hoursTF.minimumFontSize = 17
-        hoursTF.keyboardType = .asciiCapableNumberPad
-        hoursTF.delegate = self
         
         self.hoursTF = hoursTF
         self.view.addSubview(hoursTF)
@@ -133,16 +168,12 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
             hoursTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        let minutesTF = UITextField()
+        let minutesTF = UILabel()
         minutesTF.text = "\(minutes)"
-        minutesTF.placeholder = "value is 0~59"
         minutesTF.textAlignment = .center
         minutesTF.font = fontTF
         minutesTF.textColor = .systemRed
         minutesTF.adjustsFontSizeToFitWidth = true
-        minutesTF.minimumFontSize = 17
-        minutesTF.keyboardType = .asciiCapableNumberPad
-        minutesTF.delegate = self
         
         self.minutesTF = minutesTF
         self.view.addSubview(minutesTF)
@@ -156,16 +187,12 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
             minutesTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        let secondsTF = UITextField()
+        let secondsTF = UILabel()
         secondsTF.text = "\(seconds)"
-        secondsTF.placeholder = "value is 0~59"
         secondsTF.textAlignment = .center
         secondsTF.font = fontTF
         secondsTF.textColor = .systemRed
         secondsTF.adjustsFontSizeToFitWidth = true
-        secondsTF.minimumFontSize = 17
-        secondsTF.keyboardType = .asciiCapableNumberPad
-        secondsTF.delegate = self
 
         self.secondsTF = secondsTF
         self.view.addSubview(secondsTF)
@@ -216,6 +243,27 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
             colonLabel2.widthAnchor.constraint(equalToConstant: 30),
             colonLabel2.heightAnchor.constraint(equalTo: safe.heightAnchor)
         ])
+        
+        do {
+            self.hoursTF.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer()
+            tap.addTarget(self, action: #selector(toSetHours))
+            self.hoursTF.addGestureRecognizer(tap)
+        }
+        
+        do {
+            self.minutesTF.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer()
+            tap.addTarget(self, action: #selector(toSetHours))
+            self.minutesTF.addGestureRecognizer(tap)
+        }
+        
+        do {
+            self.secondsTF.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer()
+            tap.addTarget(self, action: #selector(toSetHours))
+            self.secondsTF.addGestureRecognizer(tap)
+        }
     }
     
     func createNavigatorBar() {
@@ -323,18 +371,27 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
 }
 
 
-protocol SetGameClockDelegate: AnyObject {
-    func doSetGameClock(_ hours: Int, _ minutes: Int, _ seconds: Int)
+
+
+extension SetGameClockViewController : UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(
+        _ pop: UIPopoverPresentationController) -> Bool {
+        // 点击：窗口外部，允许消失
+        return pop.presentedViewController.presentedViewController == nil
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ pop: UIPopoverPresentationController) {
+    }
 }
 
-extension MainViewController: SetGameClockDelegate {
-    func doSetGameClock(_ hours: Int, _ minutes: Int, _ seconds: Int) {
-        DispatchQueue.main.async {
-            self.game_cum_duration = Float(hours * 3600 + minutes * 60 + seconds)
-            
-            // modify show
-            let title = self.processGameClockTitle()
-            self.gameClockButton.setAttributedTitle(title, for: .normal)
-        }
+
+extension SetGameClockViewController : UINavigationControllerDelegate {
+    // deal with content size change bug
+    // this bug is evident when you tap the Change Size row and navigate back:
+    // the height doesn't change back
+    
+    func navigationController(_ nc: UINavigationController, didShow vc: UIViewController, animated: Bool) {
+        nc.preferredContentSize = vc.preferredContentSize
     }
+    
 }
