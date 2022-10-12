@@ -28,10 +28,10 @@ class VoiceTextTableViewController: UITableViewController {
         var str = "VOICE COMMANDS"
         sections.append(str)
         
-        str = "Numbers"
+        str = "Players"
         sections.append(str)
         
-        str = "Players"
+        str = "Numbers"
         sections.append(str)
         
         self.createSectionData()
@@ -153,13 +153,13 @@ class VoiceTextTableViewController: UITableViewController {
             return self.sectionVoiceCommands.count
             
         case 1:
-            // numbers
-            return self.sectionNumbers.count
-            
-        case 2:
             // Players
             return self.sectionPlayers.count
             
+        case 2:
+            // numbers
+            return self.sectionNumbers.count
+
         default:
             return self.sectionVoiceCommands.count
         }
@@ -238,10 +238,10 @@ class VoiceTextTableViewController: UITableViewController {
             lab.text = self.sectionVoiceCommands[indexPath.row]
 
         case 1:
-            lab.text = self.sectionNumbers[indexPath.row]
+            lab.text = self.sectionPlayers[indexPath.row]
 
         case 2:
-            lab.text = self.sectionPlayers[indexPath.row]
+            lab.text = self.sectionNumbers[indexPath.row]
 
         default:
             break
@@ -280,16 +280,16 @@ class VoiceTextTableViewController: UITableViewController {
             speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
 
         case 1:
-            text = self.sectionNumbers[indexPath.row]
-            title += " Number: \(text)"
-
-            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
-            
-        case 2:
             text = self.sectionPlayers[indexPath.row]
             title += " Player: \(text)"
             
             speechComandWords = "playerVoiceWords_" + self.sectionPlayers[indexPath.row]
+            
+        case 2:
+            text = self.sectionNumbers[indexPath.row]
+            title += " Number: \(text)"
+
+            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
 
         default:
             break
@@ -374,16 +374,16 @@ class VoiceTextTableViewController: UITableViewController {
             speechComandWords += "_\(indexPath.section)_\(indexPath.row)"
 
         case 1:
-            text = self.sectionNumbers[indexPath.row]
-            title += " Number: \(text)"
-
-            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
-            
-        case 2:
             text = self.sectionPlayers[indexPath.row]
             title += " Player: \(text)"
             
             speechComandWords = "playerVoiceWords_" + self.sectionPlayers[indexPath.row]
+            
+        case 2:
+            text = self.sectionNumbers[indexPath.row]
+            title += " Number: \(text)"
+
+            speechComandWords = "numberVoiceWords_" + self.sectionNumbers[indexPath.row]
 
         default:
             break
