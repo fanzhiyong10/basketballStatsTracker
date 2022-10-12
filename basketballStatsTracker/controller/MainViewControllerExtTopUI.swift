@@ -127,11 +127,13 @@ extension MainViewController {
     }
     
     func calGameClock() -> String {
-        let mins = Int(self.game_time_remaining / 60)
-        let secs = Int(self.game_time_remaining - Float(mins * 60))
-        var str = "Game Clock: "
-        str += String(format: "%02d", mins) + "m:"
-        str += String(format: "%02d", secs) + "s"
+        let hours = Int(self.game_cum_duration / 3600)
+        let minutes = Int((self.game_cum_duration - Float(hours) * 3600) / 60)
+        let seconds = Int(self.game_cum_duration - Float(hours) * 3600 - Float(minutes * 60))
+        var str = "Game Clock:  "
+        str += String(format: "%02d", hours) + " : "
+        str += String(format: "%02d", minutes) + " : "
+        str += String(format: "%02d", seconds)
         
         return str
     }
@@ -273,7 +275,7 @@ extension MainViewController {
         self.tableView.reloadData()
         
         DispatchQueue.main.async {
-            self.game_time_remaining = 40 * 60
+            self.game_cum_duration = 0
             let title = self.processGameClockTitle()
             self.gameClockButton.setAttributedTitle(title, for: .normal)
         }
@@ -374,7 +376,7 @@ extension MainViewController {
     
     @objc func tapGamClock() {
         let vc = SetGameClockViewController()
-        vc.game_time_remaining = self.game_time_remaining
+        vc.game_cum_duration = self.game_cum_duration
         vc.delegate = self
         
         var size = self.view.bounds.size

@@ -9,7 +9,9 @@ import UIKit
 
 class SetGameClockViewController: UIViewController, UITextFieldDelegate {
     // data
-    var game_time_remaining: Float = 48 * 60 // seconds
+    var game_cum_duration: Float = 0 // seconds
+    
+    private var hours: Int = 48
     private var minutes: Int = 48
     private var seconds: Int = 0
 
@@ -30,8 +32,9 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
     }
     
     func processData() {
-        self.minutes = Int(self.game_time_remaining / 60)
-        self.seconds = Int(self.game_time_remaining - Float(self.minutes * 60))
+        self.hours = Int(self.game_cum_duration / 3600)
+        self.minutes = Int((self.game_cum_duration - Float(hours) * 3600) / 60)
+        self.seconds = Int(self.game_cum_duration - Float(hours) * 3600 - Float(minutes * 60))
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -42,15 +45,35 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    var hoursTF: UITextField!
     var minutesTF: UITextField!
     var secondsTF: UITextField!
     /// Game Clock
     func createInterface() {
         let font = UIFont.systemFont(ofSize: 24)
         let fontTF = UIFont.systemFont(ofSize: 48, weight: .bold)
-        // label: minutes, seconds
+        // label: hours, minutes, seconds
+        let hoursLabel = UILabel()
+        hoursLabel.text = "Hours"
+        hoursLabel.textAlignment = .center
+        hoursLabel.font = font
+        hoursLabel.textColor = .darkGray
+        
+        self.view.addSubview(hoursLabel)
+        
+        hoursLabel.translatesAutoresizingMaskIntoConstraints = false
+        var safe = self.view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            hoursLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
+            hoursLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 12),
+            hoursLabel.widthAnchor.constraint(equalToConstant: 130),
+            hoursLabel.heightAnchor.constraint(equalToConstant: 60)
+        ])
+        
         let minutesLabel = UILabel()
-        minutesLabel.text = "Minutes ( 0 ~ 59 )"
+        minutesLabel.text = "Minutes\n(0 ~ 59)"
+        minutesLabel.numberOfLines = 2
         minutesLabel.textAlignment = .center
         minutesLabel.font = font
         minutesLabel.textColor = .darkGray
@@ -58,17 +81,18 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(minutesLabel)
         
         minutesLabel.translatesAutoresizingMaskIntoConstraints = false
-        var safe = self.view.safeAreaLayoutGuide
+//        var safe = self.view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             minutesLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20),
-            minutesLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 20),
-            minutesLabel.widthAnchor.constraint(equalToConstant: 200),
-            minutesLabel.heightAnchor.constraint(equalToConstant: 40)
+            minutesLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            minutesLabel.widthAnchor.constraint(equalToConstant: 130),
+            minutesLabel.heightAnchor.constraint(equalToConstant: 60)
         ])
         
         let secondsLabel = UILabel()
-        secondsLabel.text = "Seconds ( 0 ~ 59 )"
+        secondsLabel.text = "Seconds\n(0 ~ 59)"
+        secondsLabel.numberOfLines = 2
         secondsLabel.textAlignment = .center
         secondsLabel.font = font
         secondsLabel.textColor = .darkGray
@@ -80,12 +104,35 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             secondsLabel.centerYAnchor.constraint(equalTo: safe.centerYAnchor),
-            secondsLabel.leadingAnchor.constraint(equalTo: safe.trailingAnchor, constant: 50),
+            secondsLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -12),
             secondsLabel.widthAnchor.constraint(equalTo: safe.widthAnchor),
             secondsLabel.heightAnchor.constraint(equalTo: safe.heightAnchor)
         ])
         
         // The range of minutes is
+        let hoursTF = UITextField()
+        hoursTF.text = "\(hours)"
+        hoursTF.placeholder = "value is 0~10"
+        hoursTF.textAlignment = .center
+        hoursTF.font = fontTF
+        hoursTF.textColor = .systemRed
+        hoursTF.adjustsFontSizeToFitWidth = true
+        hoursTF.minimumFontSize = 17
+        hoursTF.keyboardType = .asciiCapableNumberPad
+        hoursTF.delegate = self
+        
+        self.hoursTF = hoursTF
+        self.view.addSubview(hoursTF)
+        
+        hoursTF.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            hoursTF.topAnchor.constraint(equalTo: safe.bottomAnchor, constant: 12),
+            hoursTF.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 12),
+            hoursTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            hoursTF.heightAnchor.constraint(equalToConstant: 60)
+        ])
+        
         let minutesTF = UITextField()
         minutesTF.text = "\(minutes)"
         minutesTF.placeholder = "value is 0~59"
@@ -151,6 +198,24 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
             colonLabel.widthAnchor.constraint(equalToConstant: 30),
             colonLabel.heightAnchor.constraint(equalTo: safe.heightAnchor)
         ])
+        
+        let colonLabel2 = UILabel()
+        colonLabel2.text = ":"
+        colonLabel2.textAlignment = .center
+        colonLabel2.font = fontTF
+        colonLabel2.textColor = .systemRed
+        
+        self.view.addSubview(colonLabel2)
+        
+        colonLabel2.translatesAutoresizingMaskIntoConstraints = false
+        safe = minutesTF.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            colonLabel2.centerYAnchor.constraint(equalTo: safe.centerYAnchor),
+            colonLabel2.centerXAnchor.constraint(equalTo: safe.leadingAnchor, constant: -25),
+            colonLabel2.widthAnchor.constraint(equalToConstant: 30),
+            colonLabel2.heightAnchor.constraint(equalTo: safe.heightAnchor)
+        ])
     }
     
     func createNavigatorBar() {
@@ -187,6 +252,10 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
     /// action
     /// 1. 验证选中的是5个，如果不是5个，则提示弹窗，继续选择
     @objc func doneSelected() {
+        guard let tmp_h = self.hoursTF.text, let hs = Int(tmp_h) else {
+            return
+        }
+        
         guard let tmp_m = self.minutesTF.text, let mins = Int(tmp_m) else {
             return
         }
@@ -195,6 +264,7 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
+        self.hours = hs
         self.minutes = mins
         self.seconds = secs
 
@@ -245,7 +315,7 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
         super.viewDidDisappear(animated)
         
         if self.doneIsRight {
-            self.delegate?.doSetGameClock(minutes, seconds)
+            self.delegate?.doSetGameClock(hours, minutes, seconds)
         }
     }
 
@@ -254,13 +324,13 @@ class SetGameClockViewController: UIViewController, UITextFieldDelegate {
 
 
 protocol SetGameClockDelegate: AnyObject {
-    func doSetGameClock(_ minutes: Int, _ seconds: Int)
+    func doSetGameClock(_ hours: Int, _ minutes: Int, _ seconds: Int)
 }
 
 extension MainViewController: SetGameClockDelegate {
-    func doSetGameClock(_ minutes: Int, _ seconds: Int) {
+    func doSetGameClock(_ hours: Int, _ minutes: Int, _ seconds: Int) {
         DispatchQueue.main.async {
-            self.game_time_remaining = Float(minutes * 60 + seconds)
+            self.game_cum_duration = Float(hours * 3600 + minutes * 60 + seconds)
             
             // modify show
             let title = self.processGameClockTitle()
