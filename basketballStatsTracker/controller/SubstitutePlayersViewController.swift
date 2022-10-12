@@ -126,10 +126,30 @@ class SubstitutePlayersViewController: UITableViewController {
     
     func processData() {
         self.sortDatas = allLiveDatas.sorted { (s1, s2) -> Bool in
+            if isPlayerSpace(s1.player!) {
+                return false
+            }
+            
             let tmp = s1.player! < s2.player!
             
             return tmp
         }
+    }
+    
+    func isPlayerSpace(_ player: String) -> Bool {
+        if player.hasPrefix(" ") {
+            let str = player
+            
+            for a in str {
+                if a != " " {
+                    return false
+                }
+            }
+            
+            return true
+        }
+        
+        return false
     }
 
     // MARK: - Table view data source
@@ -153,7 +173,10 @@ class SubstitutePlayersViewController: UITableViewController {
         
         let font = UIFont.systemFont(ofSize: 20)
         let liveData = self.sortDatas[indexPath.row]
-        let str = liveData.player! + " #" + liveData.number!
+        var str = liveData.player! + " #" + liveData.number!
+        if isPlayerSpace(liveData.player!) && isPlayerSpace(liveData.number!) {
+            str = ""
+        }
         
         cell.textLabel!.text = str
         cell.textLabel!.font = font

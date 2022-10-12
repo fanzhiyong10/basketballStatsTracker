@@ -65,6 +65,8 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
         numberTF.adjustsFontSizeToFitWidth = true
         numberTF.minimumFontSize = 17
         numberTF.keyboardType = .asciiCapableNumberPad
+        numberTF.clearButtonMode = .whileEditing
+        numberTF.borderStyle = .roundedRect
         numberTF.delegate = self
         
         self.numberTF = numberTF
@@ -74,8 +76,8 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             numberTF.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 12),
-            numberTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            numberTF.widthAnchor.constraint(equalTo: safe.widthAnchor),
+            numberTF.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 20),
+            numberTF.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -20),
             numberTF.heightAnchor.constraint(equalToConstant: 60)
         ])
         
@@ -144,7 +146,7 @@ class SetNumberViewController: UIViewController, UITextFieldDelegate {
     func alertSelectedError() {
         DispatchQueue.main.async {
             let title = "Number cannot be empty"
-            let message = ""
+            let message = "You can use spaces instead"
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),

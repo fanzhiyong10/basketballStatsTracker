@@ -66,6 +66,7 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
         playerTF.minimumFontSize = 17
 //        playerTF.keyboardType = .asciiCapableNumberPad
         playerTF.clearButtonMode = .whileEditing
+        playerTF.borderStyle = .roundedRect
         playerTF.delegate = self
         
         self.playerTF = playerTF
@@ -145,7 +146,7 @@ class SetPlayersViewController: UIViewController, UITextFieldDelegate {
     func alertSelectedError() {
         DispatchQueue.main.async {
             let title = "Player cannot be empty"
-            let message = ""
+            let message = "You can use spaces instead"
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.overrideUserInterfaceStyle = .light
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
